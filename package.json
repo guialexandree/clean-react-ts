@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests --runInBand",
+    "test:clear": "npm test --clearCache",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "npm test -- --watch --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
     "pre-commit": "lint-staged",
     "prepare": "husky install"
   },
