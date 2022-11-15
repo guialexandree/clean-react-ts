@@ -7,7 +7,7 @@
     "test": "jest --passWithNoTests --runInBand",
     "test:clear": "npm test --clearCache",
     "test:watch": "npm test -- --watch",
-    "test:staged": "npm test -- --watch --findRelatedTests",
+    "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
     "pre-commit": "lint-staged",
     "prepare": "husky install"
@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/faker": "^5.5.3",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
@@ -28,6 +29,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-standard": "^5.0.0",
+    "faker": "^5.5.3",
     "git-commit-msg-linter": "^4.2.1",
     "husky": "^8.0.0",
     "jest": "^29.3.1",
