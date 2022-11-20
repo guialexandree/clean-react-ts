@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --open --progress",
+    "build": "webpack",
     "test": "jest --passWithNoTests --runInBand --noStackTrace --no-cache",
     "test:clear": "npm test --clearCache",
     "test:watch": "npm test -- --watch",
