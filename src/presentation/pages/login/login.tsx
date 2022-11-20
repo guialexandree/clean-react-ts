@@ -1,9 +1,9 @@
 import React from 'react'
 import S from './login-styles.scss'
-import Spinner from '@/presentation/components/spinner/spinner'
 import Header from '@/presentation/components/login-header/login-header'
 import Footer from '@/presentation/components/footer/footer'
 import Input from '@/presentation/components/input/input'
+import FormStatus from '@/presentation/components/form-status/form-status'
 
 interface Props {
 	
@@ -19,10 +19,7 @@ const Login : React.FC<Props> = () => {
 				<Input type="password" name="password" placeholder="Digite sua senha" />
 				<button className={S.submit} type="submit">Entrar</button>
 				<span className={S.link}>Criar conta</span>
-				<section className={S.errorWrap}>
-					<Spinner className={S.spinner} />
-					<span className={S.error}>Erro</span>
-				</section>
+				<FormStatus />
 			</form>
 			<Footer />
 		</section>
