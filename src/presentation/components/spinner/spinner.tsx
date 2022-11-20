@@ -1,7 +1,7 @@
 import React from 'react'
 import S from './spinner-styles.scss'
 
-type SpinnerProps = React.HTMLAttributes<HTMLElement>
+type SpinnerProps = React.HTMLAttributes<HTMLElement> & { className: string }
 
 const Spinner: React.FC<SpinnerProps> = ({ className, ...props}) => {
 	return (

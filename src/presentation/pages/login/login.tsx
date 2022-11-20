@@ -1,15 +1,10 @@
 import React from 'react'
 import S from './login-styles.scss'
-import Header from '@/presentation/components/login-header/login-header'
-import Footer from '@/presentation/components/footer/footer'
-import Input from '@/presentation/components/input/input'
-import FormStatus from '@/presentation/components/form-status/form-status'
+import { LoginHeader as Header, Footer, Input, FormStatus} from '@/presentation/components'
 
-interface Props {
-	
-}
+type LoginProps = { }
  
-const Login : React.FC<Props> = () => {
+const Login : React.FC<LoginProps> = () => {
 	return (
 		<section className={S.login}>
 			<Header />
