@@ -3,6 +3,7 @@ import S from './login-styles.scss'
 import Spinner from '@/presentation/components/spinner/spinner'
 import Header from '@/presentation/components/login-header/login-header'
 import Footer from '@/presentation/components/footer/footer'
+import Input from '@/presentation/components/input/input'
 
 interface Props {
 	
@@ -14,14 +15,8 @@ const Login : React.FC<Props> = () => {
 			<Header />
 			<form className={S.form} action="">
 				<h2>Login</h2> 
-				<section className={S.inputWrap}>
-					<input type="email" name="email" placeholder="Digite seu e-mail" />
-					<span className={S.status}>🔴</span>
-				</section>
-				<section className={S.inputWrap}>
-				<input type="password" name="password" placeholder="Digite sua senha" />
-					<span className={S.status}>🔴</span>
-				</section>
+				<Input type="email" name="email" placeholder="Digite seu e-mail" />
+				<Input type="password" name="password" placeholder="Digite sua senha" />
 				<button className={S.submit} type="submit">Entrar</button>
 				<span className={S.link}>Criar conta</span>
 				<section className={S.errorWrap}>
