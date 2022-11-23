@@ -3,15 +3,12 @@ import S from './login-styles.scss'
 import { LoginHeader as Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 
-type StateProps = {
-  isLoading: boolean
-  errorMessage: string
-}
-
 const Login: React.FC = () => {
-  const [state] = useState<StateProps>({
+  const [state] = useState({
     isLoading: false,
-    errorMessage: ''
+    errorMessage: '',
+		emailError: 'Campo Obrigatório',
+		passwordError: 'Campo Obrigatório'
   })
 
   return (
