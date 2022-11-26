@@ -6,10 +6,12 @@ import { Validation } from '@/presentation/protocols/validation'
 
 class ValidationSpy implements Validation {
   errorMessage: string
-  input: object
+  fieldName: string
+  fieldValue: string
 
-  validate (input: object): string {
-    this.input = input
+  validate (fieldName: string, fieldValue: string): string {
+    this.fieldName = fieldName
+    this.fieldValue = fieldValue
     return this.errorMessage
   }
 }
@@ -54,9 +56,8 @@ describe('Login Component', () => {
     const emailInput = sut.getByTestId('email')
     const email = faker.internet.email()
     fireEvent.input(emailInput, { target: { value: email } })
-    expect(validationSpy.input).toEqual({
-      email
-    })
+    expect(validationSpy.fieldName).toBe('email')
+    expect(validationSpy.fieldValue).toBe(email)
   })
 
 	test('Should call Validation with correct password', () => {
@@ -64,8 +65,7 @@ describe('Login Component', () => {
     const passwordInput = sut.getByTestId('password')
     const password = faker.internet.password()
     fireEvent.input(passwordInput, { target: { value: password } })
-    expect(validationSpy.input).toEqual({
-      password
-    })
+    expect(validationSpy.fieldName).toBe('password')
+    expect(validationSpy.fieldValue).toBe(password)
   })
 })
