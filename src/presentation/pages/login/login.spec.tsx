@@ -11,7 +11,7 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub()
-	validationStub.errorMessage = faker.random.words()
+  validationStub.errorMessage = faker.random.words()
   const sut = render(<Login validation={validationStub} />)
 
   return {
@@ -40,23 +40,34 @@ describe('Login Component', () => {
     expect(passwordStatus.textContent).toBe('🔴')
   })
 
-	test('Should show email erro if validation fails', () => {
+  test('Should show email erro if validation fails', () => {
     const { sut, validationStub } = makeSut()
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
     const emailStatus = sut.getByTestId('email-status')
-    
-		expect(emailStatus.title).toBe(validationStub.errorMessage)
-		expect(emailStatus.textContent).toBe('🔴')
+
+    expect(emailStatus.title).toBe(validationStub.errorMessage)
+    expect(emailStatus.textContent).toBe('🔴')
   })
 
-	test('Should show password erro if validation fails', () => {
+  test('Should show password erro if validation fails', () => {
     const { sut, validationStub } = makeSut()
-    const emailInput = sut.getByTestId('password')
-    fireEvent.input(emailInput, { target: { value: faker.internet.password() } })
-    const emailStatus = sut.getByTestId('password-status')
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
+    const passwordStatus = sut.getByTestId('password-status')
 
-		expect(emailStatus.title).toBe(validationStub.errorMessage)
-		expect(emailStatus.textContent).toBe('🔴')
+    expect(passwordStatus.title).toBe(validationStub.errorMessage)
+    expect(passwordStatus.textContent).toBe('🔴')
+  })
+
+	test('Should show valid email state if validation succeeds', () => {
+    const { sut, validationStub } = makeSut()
+		validationStub.errorMessage = null
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
+    const emailStatus = sut.getByTestId('email-status')
+
+    expect(emailStatus.title).toBe('Ok')
+    expect(emailStatus.textContent).toBe('🟢')
   })
 })
