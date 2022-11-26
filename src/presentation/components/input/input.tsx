@@ -2,23 +2,32 @@ import React, { useContext } from 'react'
 import S from './input-styles.scss'
 import Context from '@/presentation/contexts/form/form-context'
 
-type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & { 
+	name: string 
+}
 
 const Input: React.FC<InputProps> = (props) => {
-	const value = useContext(Context)
-	const error = value[`${props.name}Error`]
+  const { state, setState } = useContext(Context)
+  const error = state[`${props.name}Error`]
 
-	const getStatus = (): string => {
-		return '🔴'
-	}
+  const getStatus = (): string => {
+    return '🔴'
+  }
 
-	const getTitle = (): string => {
-		return error
-	}
+  const getTitle = (): string => {
+    return error
+  }
+
+  const handleChange = (event: React.FocusEvent<HTMLInputElement>): void => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    })
+  }
 
   return (
 		<section className={S.inputWrap}>
-			<input {...props} />
+			<input data-testid={`${props.name}`} onChange={handleChange} {...props} />
 			<span data-testid={`${props.name}-status`} title={getTitle()} className={S.status}>{getStatus()}</span>
 		</section>
   )

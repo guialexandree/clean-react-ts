@@ -6,11 +6,12 @@ import Context from '@/presentation/contexts/form/form-context'
 type FormStatusProps = {}
 
 const FormStatus: React.FC<FormStatusProps> = () => {
-  const { isLoading, errorMessage } = useContext(Context)
+  const { state } = useContext(Context)
+	const { isLoading, mainError } = state
   return (
 		<section data-testid='error-wrap' className={S.errorWrap}>
 			{ isLoading && <Spinner className={S.spinner} /> }
-			{ errorMessage && <span className={S.error}>Erro</span> }
+			{ mainError && <span className={S.error}>mainError</span> }
 		</section>
   )
 }
