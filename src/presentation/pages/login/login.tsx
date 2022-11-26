@@ -14,8 +14,8 @@ const Login: React.FC<LoginProps> = ({
   const [state, setState] = useState({
     isLoading: false,
     mainError: '',
-    emailError: 'Campo Obrigatório',
-    passwordError: 'Campo Obrigatório',
+    emailError: '',
+    passwordError: '',
     email: '',
     password: ''
   })
@@ -23,13 +23,10 @@ const Login: React.FC<LoginProps> = ({
   useEffect(() => {
 		setState({
 			...state,
-			emailError: validation.validate('email', state.email)
+			emailError: validation.validate('email', state.email),
+			passwordError: validation.validate('password', state.password)
 		})
-  }, [state.email])
-
-  useEffect(() => {
-    validation.validate('password', state.password)
-  }, [state.password])
+  }, [state.email, state.password])
 
   return (
 		<section className={S.login}>
