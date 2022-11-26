@@ -1,20 +1,8 @@
 import * as React from 'react'
 import { render, RenderResult, cleanup, fireEvent } from '@testing-library/react'
+import { ValidationSpy } from '@/presentation/test'
 import Login from './login'
 import faker from 'faker'
-import { Validation } from '@/presentation/protocols/validation'
-
-class ValidationSpy implements Validation {
-  errorMessage: string
-  fieldName: string
-  fieldValue: string
-
-  validate (fieldName: string, fieldValue: string): string {
-    this.fieldName = fieldName
-    this.fieldValue = fieldValue
-    return this.errorMessage
-  }
-}
 
 type SutTypes = {
   sut: RenderResult
@@ -60,7 +48,7 @@ describe('Login Component', () => {
     expect(validationSpy.fieldValue).toBe(email)
   })
 
-	test('Should call Validation with correct password', () => {
+  test('Should call Validation with correct password', () => {
     const { sut, validationSpy } = makeSut()
     const passwordInput = sut.getByTestId('password')
     const password = faker.internet.password()
