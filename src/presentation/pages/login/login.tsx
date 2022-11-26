@@ -4,25 +4,25 @@ import { LoginHeader as Header, Footer, Input, FormStatus } from '@/presentation
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 
-type LoginProps ={
-	validation: Validation
+type LoginProps = {
+  validation: Validation
 }
 
 const Login: React.FC<LoginProps> = ({
-	validation
+  validation
 }: LoginProps) => {
   const [state, setState] = useState({
     isLoading: false,
     mainError: '',
-		emailError: 'Campo Obrigatório',
-		passwordError: 'Campo Obrigatório',
-		email: ''
+    emailError: 'Campo Obrigatório',
+    passwordError: 'Campo Obrigatório',
+    email: ''
   })
 
-	useEffect(() => {
-		validation.validate({ email: state.email})
-	}, [state.email])
-	
+  useEffect(() => {
+    validation.validate({ email: state.email })
+  }, [state.email])
+
   return (
 		<section className={S.login}>
 			<Header />

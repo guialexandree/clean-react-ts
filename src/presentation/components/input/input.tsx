@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import S from './input-styles.scss'
 import Context from '@/presentation/contexts/form/form-context'
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & { 
-	name: string 
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  name: string
 }
 
 const Input: React.FC<InputProps> = (props) => {

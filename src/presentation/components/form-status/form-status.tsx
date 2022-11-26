@@ -7,7 +7,7 @@ type FormStatusProps = {}
 
 const FormStatus: React.FC<FormStatusProps> = () => {
   const { state } = useContext(Context)
-	const { isLoading, mainError } = state
+  const { isLoading, mainError } = state
   return (
 		<section data-testid='error-wrap' className={S.errorWrap}>
 			{ isLoading && <Spinner className={S.spinner} /> }
