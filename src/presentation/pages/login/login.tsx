@@ -21,11 +21,11 @@ const Login: React.FC<LoginProps> = ({
   })
 
   useEffect(() => {
-		setState({
-			...state,
-			emailError: validation.validate('email', state.email),
-			passwordError: validation.validate('password', state.password)
-		})
+    setState({
+      ...state,
+      emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password)
+    })
   }, [state.email, state.password])
 
   return (

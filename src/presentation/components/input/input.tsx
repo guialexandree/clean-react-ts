@@ -11,11 +11,11 @@ const Input: React.FC<InputProps> = (props) => {
   const error = state[`${props.name}Error`]
 
   const getStatus = (): string => {
-    return '🔴'
+    return error ? '🔴' : '🟢'
   }
 
   const getTitle = (): string => {
-    return error
+    return error || 'Ok'
   }
 
   const handleChange = (event: React.FocusEvent<HTMLInputElement>): void => {
