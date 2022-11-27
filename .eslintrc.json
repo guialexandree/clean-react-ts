@@ -21,7 +21,8 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
 		"no-tabs": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+		"@typescript-eslint/no-misused-promises": "off"
     // "@typescript-eslint/no-floating-promises": "off",
     // "@typescript-eslint/comma-spacing": "off",
     // "@typescript-eslint/return-await": "off",
