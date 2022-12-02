@@ -22,7 +22,18 @@ describe('ValidationBuilder', () => {
   })
 
   test('Should return MinLengthValidation', () => {
-    const validations = sut.field(fieldName).min(5).build()
-    expect(validations).toEqual([new MinLengthValidation(fieldName, 5)])
+    const length = faker.datatype.number()
+    const validations = sut.field(fieldName).min(length).build()
+    expect(validations).toEqual([new MinLengthValidation(fieldName, length)])
+  })
+
+  test('Should return a list of validations', () => {
+    const length = faker.datatype.number()
+    const validations = sut.field(fieldName).required().email().min(length).build()
+    expect(validations).toEqual([
+      new RequiredFieldValidation(fieldName),
+      new EmailValidation(fieldName),
+      new MinLengthValidation(fieldName, length)
+    ])
   })
 })
