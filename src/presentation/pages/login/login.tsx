@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import S from './login-styles.scss'
 import { LoginHeader as Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
-import { Validation } from '@/presentation/protocols/validation'
+import { Validation } from '@/presentation/protocols'
 import { Authentication } from '@/domain/usecases'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -36,9 +36,6 @@ const Login: React.FC<LoginProps> = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     try {
-      console.log('state.isLoading', state.isLoading)
-      console.log('state.emailError', state.emailError)
-      console.log('state.passwordError', state.passwordError)
       if (state.isLoading || state.emailError || state.passwordError) { return }
       setState({ ...state, isLoading: true })
       const account = await authentication.auth({

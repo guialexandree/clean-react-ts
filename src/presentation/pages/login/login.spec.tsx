@@ -1,4 +1,4 @@
-import Login from './login'
+import { Login } from '@/presentation/pages'
 import { Authentication } from '@/domain/usecases'
 import { ValidationStub, AuthenticationSpy, renderWithHistory } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
