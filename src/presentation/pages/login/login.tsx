@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import S from './login-styles.scss'
+import { Authentication, SaveAccessToken } from '@/domain/usecases'
 import { LoginHeader as Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols'
-import { Authentication } from '@/domain/usecases'
 import { Link, useHistory } from 'react-router-dom'
 
 type LoginProps = {
   validation: Validation
   authentication: Authentication
+	saveAccessToken: SaveAccessToken
 }
 
 const Login: React.FC<LoginProps> = ({
   validation,
-  authentication
+  authentication,
+	saveAccessToken
 }: LoginProps) => {
   const history = useHistory()
   const [state, setState] = useState({
@@ -42,7 +44,7 @@ const Login: React.FC<LoginProps> = ({
         email: state.email,
         password: state.password
       })
-      localStorage.setItem('accessToken', account.accessToken)
+      await saveAccessToken.save(account.accessToken)
       history.replace('/')
     } catch (error) {
       setState({
