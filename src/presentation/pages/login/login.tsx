@@ -9,13 +9,13 @@ import { Link, useHistory } from 'react-router-dom'
 type LoginProps = {
   validation: Validation
   authentication: Authentication
-	saveAccessToken: SaveAccessToken
+  saveAccessToken: SaveAccessToken
 }
 
 const Login: React.FC<LoginProps> = ({
   validation,
   authentication,
-	saveAccessToken
+  saveAccessToken
 }: LoginProps) => {
   const history = useHistory()
   const [state, setState] = useState({

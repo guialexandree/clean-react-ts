@@ -1,36 +1,15 @@
 import { Login } from '@/presentation/pages'
 import { Authentication } from '@/domain/usecases'
-import { ValidationStub, AuthenticationSpy, renderWithHistory } from '@/presentation/test/mocks'
+import { ValidationStub, AuthenticationSpy, renderWithHistory, SaveAccessTokenMock } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import faker from 'faker'
-import 'jest-localstorage-mock'
 import { cleanup, fireEvent, waitFor, screen } from '@testing-library/react'
-
-type SutTypes = {
-  authenticationSpy: AuthenticationSpy
-  setCurrentAccountMock: (account: Authentication.Model) => void
-}
 
 type SutParams = {
   validationError: string
 }
 
 const history = createMemoryHistory({ initialEntries: ['/login'] })
-
-const makeSut = (params?: SutParams): SutTypes => {
-  const validationStub = new ValidationStub()
-  validationStub.errorMessage = params?.validationError
-  const authenticationSpy = new AuthenticationSpy()
-  const { setCurrentAccountMock } = renderWithHistory({
-    history,
-    Page: () => Login({ validation: validationStub, authentication: authenticationSpy })
-  })
-
-  return {
-    authenticationSpy,
-    setCurrentAccountMock
-  }
-}
 
 const simulateValidSumbit = async (email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   populatEmailField(email)
@@ -76,12 +55,31 @@ const testButtonIsDisabled = (fieldName: string, isDisabled: boolean): void => {
   expect(button.disabled).toBe(isDisabled)
 }
 
+type SutTypes = {
+  authenticationSpy: AuthenticationSpy
+  setCurrentAccountMock: (account: Authentication.Model) => void
+  saveAccessTokenMock: SaveAccessTokenMock
+}
+
+const makeSut = (params?: SutParams): SutTypes => {
+  const validationStub = new ValidationStub()
+  validationStub.errorMessage = params?.validationError
+  const authenticationSpy = new AuthenticationSpy()
+  const saveAccessTokenMock = new SaveAccessTokenMock()
+  const { setCurrentAccountMock } = renderWithHistory({
+    history,
+    Page: () => Login({ validation: validationStub, authentication: authenticationSpy, saveAccessToken: saveAccessTokenMock })
+  })
+
+  return {
+    authenticationSpy,
+    setCurrentAccountMock,
+    saveAccessTokenMock
+  }
+}
+
 describe('Login Component', () => {
   afterEach(cleanup)
-
-  beforeEach(() => {
-    localStorage.clear()
-  })
 
   test('Should start with initial state', () => {
     const validationError = faker.random.words()
@@ -162,10 +160,10 @@ describe('Login Component', () => {
   //   testErrorWrapChildCount(1)
   // })
 
-  test('Should add accessToken to localStorage on success', async () => {
-    const { authenticationSpy } = makeSut()
+  test('Should call SaveAccessToken on success', async () => {
+    const { authenticationSpy, saveAccessTokenMock } = makeSut()
     await simulateValidSumbit()
-    expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
+    expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken)
   })
 
   test('Should go to signup page', async () => {
