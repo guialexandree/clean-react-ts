@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import Spinner from '../spinner/spinner'
 import S from './form-status-styles.scss'
+import { Spinner } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 
 type FormStatusProps = {}
