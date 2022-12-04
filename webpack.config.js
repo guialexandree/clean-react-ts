@@ -1,8 +1,9 @@
 const path = require('path')
+const { DefinePlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-	mode: 'production',
+	mode: 'development',
 	entry: './src/main/index.tsx',
 	output: {
 		path: path.join(__dirname, 'public/js'),
@@ -51,6 +52,9 @@ module.exports = {
 		axios: 'axios'
 	},
 	plugins: [
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		new DefinePlugin({
+			'process.env.API_URL': 'http://localhost:5050/api'
+		})
 	]
 }
