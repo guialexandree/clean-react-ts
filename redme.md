@@ -1,0 +1,1 @@
+[![Build Status](https://app.travis-ci.com/guialexandree/clean-react-ts.svg?branch=master)](https://app.travis-ci.com/guialexandree/clean-react-ts)
