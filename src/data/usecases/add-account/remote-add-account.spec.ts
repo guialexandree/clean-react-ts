@@ -26,8 +26,18 @@ describe('RemoteAuthentication', () => {
   test('Should call httpCliente if correct url', async () => {
     const url = faker.internet.url()
     const { sut, httpPostClientSpy } = makeSut(url)
+
     await sut.add(mockAddAccount())
 
     expect(httpPostClientSpy.url).toBe(url)
+  })
+
+  test('Should call httpCliente if correct body', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    const addAccountParams = mockAddAccount()
+
+    await sut.add(addAccountParams)
+
+    expect(httpPostClientSpy.body).toEqual(addAccountParams)
   })
 })
