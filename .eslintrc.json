@@ -17,7 +17,6 @@
     "project": "./tsconfig-eslint.json"
   },
   "rules": {
-		"quotes": [2, "tabs", { "avoidEscape": true }],
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
 		"@typescript-eslint/no-misused-promises": "off",
@@ -26,6 +25,7 @@
     "@typescript-eslint/comma-spacing": "off",
 		"@typescript-eslint/no-unused-vars": "off",
     "react/jsx-uses-react": "error",
+		"no-tabs": "off",
     "react/jsx-uses-vars": "error",
 		"no-useless-escape": "off"
     // "@typescript-eslint/no-floating-promises": "off",
