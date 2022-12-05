@@ -1,52 +1,56 @@
-import { RenderResult, screen } from '@testing-library/react'
+import { cleanup, fireEvent, RenderResult, screen } from '@testing-library/react'
+import { Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
+import { createMemoryHistory } from 'history'
+import faker from 'faker'
+import SignUp from './signup'
+
+type SutTypes = {
+  sut: any
+}
 
 type SutParams = {
-  sut: RenderResult
+  validationError: string
 }
 
-// const makeSut = (params?: SutParams): SutTypes => {
-//   const sut = new ValidationStub()
-//   validationStub.errorMessage = params?.validationError
-//   const authenticationSpy = new AuthenticationSpy()
-//   const saveAccessTokenMock = new SaveAccessTokenMock()
-//   const { setCurrentAccountMock } = renderWithHistory({
-//     history,
-//     Page: () => Login({ validation: validationStub, authentication: authenticationSpy, saveAccessToken: saveAccessTokenMock })
-//   })
+const history = createMemoryHistory({ initialEntries: ['/signup'] })
 
-//   return {
-//     authenticationSpy,
-//     setCurrentAccountMock,
-//     saveAccessTokenMock
-//   }
-// }
-
-const testChildCount = (sut: RenderResult, field: string, count: number): void => {
-  const el = screen.getByTestId(field)
-  expect(el.childElementCount).toBe(count)
+const populateField = (fieldName: string, value = faker.random.word()): void => {
+  const emailInput = screen.getByTestId(fieldName)
+  fireEvent.input(emailInput, { target: { value } })
 }
 
-const testStatusFormField = (fieldName: string, validationError?: string): void => {
-  const fieldStatus = screen.getByTestId(`${fieldName}-status`)
-  expect(fieldStatus.title).toBe(validationError || 'Ok')
-  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
-}
+const makeSut = (params?: SutParams): SutTypes => {
+  const validationStub = new ValidationStub()
+  validationStub.errorMessage = params?.validationError
+  const { setCurrentAccountMock } = renderWithHistory({
+    history,
+    Page: () => SignUp({ validation: validationStub })
+  })
 
-const testButtonIsDisabled = (fieldName: string, isDisabled: boolean): void => {
-  const button = screen.getByTestId<HTMLButtonElement>(fieldName)
-  expect(button.disabled).toBe(isDisabled)
+  return {
+    sut: setCurrentAccountMock
+  }
 }
 
 describe('SignUp Component', () => {
+  afterEach(cleanup)
   // test('Should start with initial state', () => {
-	// 	const sut = null
-	// 	const validationError = 'Campo Obrigatório'
-	// 	testChildCount(sut, 'error-wrap', 0)
-	// 	testButtonIsDisabled('submit', true)
-	// 	testStatusFormField('email', validationError)
-	// 	testStatusFormField('password', validationError)
+  // 	const validationError = faker.random.words()
+  // 	const { sut } = makeSut({ validationError })
+  // 	Helper.testButtonIsDisabled(sut, 'error-wrap', 0)
+  // 	Helper.testStatusFormField('name', validationError)
+  // 	Helper.testStatusFormField('email', 'Campo Obrigatório')
+  // 	Helper.testStatusFormField('password', 'Campo Obrigatório')
+  // 	Helper.testStatusFormField('passwordConfirmation', 'Campo Obrigatório')
   // })
-	test('SignUp Component ', () => {
-		expect(true).toBe(true)
-	});
+  test('SignUp Component ', () => {
+    expect(true).toBe(true)
+  })
+
+  // test('Should show name error if Validation fails', () => {
+  // 	const validationError = faker.random.words()
+  // 	const { sut } = makeSut({ validationError })
+  // 	populateField(sut, 'name')
+  // 	Helper.testStatusFormField('name', validationError)
+  // });
 })
