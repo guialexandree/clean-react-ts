@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import S from './signup-styles.scss'
 import { Authentication, SaveAccessToken } from '@/domain/usecases'
 import { LoginHeader as Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols'
-import { Link } from 'react-router-dom'
 
 type SignUpProps = {
   validation: Validation
@@ -12,15 +11,20 @@ type SignUpProps = {
   saveAccessToken: SaveAccessToken
 }
 
-const SignUp: React.FC<SignUpProps> = ({
-  validation,
-  authentication,
-  saveAccessToken
-}: SignUpProps) => {
+const SignUp: React.FC<SignUpProps> = () => {
+	const [state, setState] = useState({
+    isLoading: false,
+    mainError: '',
+    nameError: 'Campo Obrigatório',
+    emailError: 'Campo Obrigatório',
+    passwordError: 'Campo Obrigatório',
+    passwordConfirmationError: 'Campo Obrigatório'
+  })
+
   return (
 		<section className={S.signup}>
 			<Header />
-			<Context.Provider value={{ state: {} }}>
+			<Context.Provider value={{ state }}>
 				<form className={S.form}>
 					<h2>Criar Conta</h2>
 					<Input type="text" name="name" placeholder="Digite seu nome" />
@@ -28,7 +32,7 @@ const SignUp: React.FC<SignUpProps> = ({
 					<Input type="password" name="password" placeholder="Digite sua senha" />
 					<Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
 					<button className={S.submit} type="submit">Entrar</button>
-					<Link to="/login" className={S.link}>Voltar para Login</Link>
+					<span className={S.link}>Voltar para Login</span>
 					<FormStatus />
 				</form>
 			</Context.Provider>
