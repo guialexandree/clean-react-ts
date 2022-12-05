@@ -3,7 +3,7 @@ import { Authentication } from '@/domain/usecases'
 import { ValidationStub, AuthenticationSpy, renderWithHistory, SaveAccessTokenMock } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import faker from 'faker'
-import { cleanup, fireEvent, waitFor, screen } from '@testing-library/react'
+import { cleanup, fireEvent, waitFor, screen, RenderResult } from '@testing-library/react'
 
 type SutParams = {
   validationError: string
@@ -20,9 +20,9 @@ const simulateValidSumbit = async (email = faker.internet.email(), password = fa
 }
 
 const testStatusFormField = (fieldName: string, validationError?: string): void => {
-  const emailStatus = screen.getByTestId(`${fieldName}-status`)
-  expect(emailStatus.title).toBe(validationError || 'Ok')
-  expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🟢')
+  const fieldStatus = screen.getByTestId(`${fieldName}-status`)
+  expect(fieldStatus.title).toBe(validationError || 'Ok')
+  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
 const populatEmailField = (email = faker.internet.email()): void => {
@@ -35,10 +35,10 @@ const populatPasswordField = (password = faker.internet.password()): void => {
   fireEvent.input(passwordInput, { target: { value: password } })
 }
 
-// const testErrorWrapChildCount = (count: number): void => {
-//   const errorWrap = screen.getByTestId('error-wrap')
-//   expect(errorWrap.childElementCount).toBe(count)
-// }
+const testChildCount = (sut: RenderResult, field: string, count: number): void => {
+  const el = screen.getByTestId(field)
+  expect(el.childElementCount).toBe(count)
+}
 
 const testElementExists = (fieldName: string): void => {
   const spinner = screen.getByTestId(fieldName)
@@ -58,11 +58,11 @@ const testButtonIsDisabled = (fieldName: string, isDisabled: boolean): void => {
 type SutTypes = {
   authenticationSpy: AuthenticationSpy
   setCurrentAccountMock: (account: Authentication.Model) => void
-  saveAccessTokenMock: SaveAccessTokenMock
+	saveAccessTokenMock: SaveAccessTokenMock
 }
 
 const makeSut = (params?: SutParams): SutTypes => {
-  const validationStub = new ValidationStub()
+	const validationStub = new ValidationStub()
   validationStub.errorMessage = params?.validationError
   const authenticationSpy = new AuthenticationSpy()
   const saveAccessTokenMock = new SaveAccessTokenMock()
