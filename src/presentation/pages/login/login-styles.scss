@@ -23,19 +23,6 @@
 			text-transform: uppercase;
 		}
 
-		.submit {
-			margin-top: 32px;
-			cursor: pointer;
-			&:disabled {
-				background-color: $disabledBackground;
-				color: $disabledColor;
-
-				&:hover {
-					opacity: 1;
-				}
-			}
-		}
-
 		.link {
 			color: $primary;
 			text-align: center;
