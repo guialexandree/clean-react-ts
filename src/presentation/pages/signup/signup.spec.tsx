@@ -181,4 +181,12 @@ describe('SignUp Component', () => {
   //   await simulateValidSumbit(sut)
   //   expect(saveAccessTokenMock.accessToken).toBe(addAccountSpy.account.accessToken)
   // })
+
+	// test('Should go to login page', async () => {
+  //   const { sut } = makeSut()
+  //   const loginLink = sut.getByTestId('signup-link')
+  //   fireEvent.click(loginLink)
+	// 	expect(history.length).toBe(1)
+	// 	expect(history.location.pathname).toBe('/login')
+  // })
 })
