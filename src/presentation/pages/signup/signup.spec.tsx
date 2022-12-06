@@ -156,4 +156,13 @@ describe('SignUp Component', () => {
   //   // await simulateValidSumbit(sut)
   //   expect(addAccountSpy.callsCount).toBe(0)
   // })
+
+	// test('Should present error if AddAccount fails',  async () => {
+  //   const { sut, authenticationSpy } = makeSut()
+  // 	const error = new EmailInUseError()
+  // 	jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error)
+  //   await simulateValidSumbit(sut)
+  // 	testElementText('main-error', error.message)
+  //   Helper.testChildCount(sut, 'error-warap', 1)
+  // })
 })
