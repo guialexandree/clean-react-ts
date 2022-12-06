@@ -1,7 +1,28 @@
-import { cleanup } from '@testing-library/react'
-import { renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
+import { cleanup, fireEvent, RenderResult, waitFor } from '@testing-library/react'
+import { Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import SignUp from './signup'
+import faker from 'faker'
+
+const simulateValidSumbit = async (
+	name = faker.internet.email(), 
+	email = faker.internet.email(), 
+	password = faker.internet.password()
+	): Promise<void> => {
+  const sut = {}
+	Helper.populateField(sut, 'name', name)
+	Helper.populateField(sut, 'email', email)
+  Helper.populateField(sut, 'password', password)
+  Helper.populateField(sut, 'passwordConfirmation', password)
+  const form = sut.getByTestId('form')
+  fireEvent.submit(form)
+  await waitFor(() => form)
+}
+
+const testElementExists = (sut: RenderResult, fieldName: string): void => {
+  const spinner = screen.getByTestId(fieldName)
+  expect(spinner).toBeTruthy()
+}
 
 type SutTypes = {
   sut: any
@@ -93,4 +114,19 @@ describe('SignUp Component', () => {
   //   Helper.populatField(sut., 'passwordConfirmation')
   //   Helper.testStatusFormField(sut, 'passwordConfirmation')
   // })
+
+	// test('Should enable submit button if form is valid', () => {
+  //   makeSut()
+  //   Helper.populatField(sut, 'name')
+  //   Helper.populatField(sut, 'email')
+  //   Helper.populatField(sut, 'password')
+  //   Helper.populatField(sut, 'passwordConfirmation')
+  //   Helper.testButtonIsDisabled('submit', false)
+  // })
+
+	test('Should show spinner on submit', async () => {
+    const { sut } = makeSut()
+    await simulateValidSumbit(sut)
+    testElementExists(sut, 'spinner')
+  })
 })
