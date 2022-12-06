@@ -36,7 +36,7 @@ describe('SignUp Component', () => {
   // 	Helper.testStatusFormField(sut, 'name', validationError)
   // 	Helper.testStatusFormField(sut, 'email', validationError)
   // 	Helper.testStatusFormField(sut, 'password', validationError)
-  // 	Helper.testStatusFormField(sut, 'passwordConfirmation', 'Campo Obrigatório')
+  // 	Helper.testStatusFormField(sut, 'passwordConfirmation', validationError)
   // })
   test('SignUp Component ', () => {
     expect(true).toBe(true)
@@ -61,5 +61,12 @@ describe('SignUp Component', () => {
   // 	const { sut } = makeSut({ validationError })
   // 	Helper.populateField(sut, 'password')
   // 	Helper.testStatusFormField(sut, 'password', validationError)
+  // })
+
+	// test('Should show passwordConfirmation error if Validation fails', () => {
+  // 	const validationError = faker.random.words()
+  // 	const { sut } = makeSut({ validationError })
+  // 	Helper.populateField(sut, 'passwordConfirmation')
+  // 	Helper.testStatusFormField(sut, 'passwordConfirmation', validationError)
   // })
 })
