@@ -12,14 +12,14 @@ type SignUpProps = {
 
 const SignUp: React.FC<SignUpProps> = ({
   validation,
-	addAccount
+  addAccount
 }: SignUpProps) => {
   const [state, setState] = useState({
     isLoading: false,
     name: '',
-		email: '',
-		password: '',
-		passwordConfirmation: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
     mainError: '',
     nameError: '',
     emailError: '',
@@ -37,15 +37,16 @@ const SignUp: React.FC<SignUpProps> = ({
     })
   }, [state.name, state.email, state.password, state.passwordConfirmation])
 
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setState({...state, isLoading: true})
-		await addAccount.add({
-			name: state.name,
-			email: state.email,
-			password: state.password,
-			passwordConfirmation: state.passwordConfirmation
-		})
+		if (state.isLoading) { return }
+    setState({ ...state, isLoading: true })
+    await addAccount.add({
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      passwordConfirmation: state.passwordConfirmation
+    })
   }
 
   return (
@@ -58,7 +59,7 @@ const SignUp: React.FC<SignUpProps> = ({
 					<Input type="email" name="email" placeholder="Digite seu e-mail" />
 					<Input type="password" name="password" placeholder="Digite sua senha" />
 					<Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
-					<button disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !! state.passwordConfirmationError} className={S.submit} type="submit">Entrar</button>
+					<button disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError} className={S.submit} type="submit">Entrar</button>
 					<span className={S.link}>Voltar para Login</span>
 					<FormStatus />
 				</form>
