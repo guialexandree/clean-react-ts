@@ -1,26 +1,27 @@
 import { cleanup, fireEvent, waitFor } from '@testing-library/react'
-import { Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
+import { AddAccountSpy, Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import SignUp from './signup'
 import faker from 'faker'
 
-const simulateValidSumbit = async (
-	name = faker.internet.email(), 
-	email = faker.internet.email(), 
-	password = faker.internet.password()
-	): Promise<void> => {
-  const sut = {}
-	Helper.populateField(sut, 'name', name)
-	Helper.populateField(sut, 'email', email)
-  Helper.populateField(sut, 'password', password)
-  Helper.populateField(sut, 'passwordConfirmation', password)
-  const form = sut.getByTestId('form')
-  fireEvent.submit(form)
-  await waitFor(() => form)
-}
+// const simulateValidSumbit = async (
+// 	name = faker.internet.email(), 
+// 	email = faker.internet.email(), 
+// 	password = faker.internet.password()
+// 	): Promise<void> => {
+//   const sut = {}
+// 	Helper.populateField(sut, 'name', name)
+// 	Helper.populateField(sut, 'email', email)
+//   Helper.populateField(sut, 'password', password)
+//   Helper.populateField(sut, 'passwordConfirmation', password)
+//   const form = sut.getByTestId('form')
+//   fireEvent.submit(form)
+//   await waitFor(() => form)
+// }
 
 type SutTypes = {
   sut: any
+	addAccountSpy: AddAccountSpy
 }
 
 type SutParams = {
@@ -32,13 +33,15 @@ const history = createMemoryHistory({ initialEntries: ['/signup'] })
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   validationStub.errorMessage = params?.validationError
+	const addAccountSpy = new AddAccountSpy()
   const { setCurrentAccountMock } = renderWithHistory({
     history,
-    Page: () => SignUp({ validation: validationStub })
+    Page: () => SignUp({ validation: validationStub, addAccount:addAccountSpy  })
   })
 
   return {
-    sut: setCurrentAccountMock
+    sut: setCurrentAccountMock,
+		addAccountSpy
   }
 }
 
@@ -119,9 +122,23 @@ describe('SignUp Component', () => {
   //   Helper.testButtonIsDisabled('submit', false)
   // })
 
-	test('Should show spinner on submit', async () => {
-    const { sut } = makeSut()
-    await simulateValidSumbit(sut)
-    Helper.testElementExists(sut, 'spinner')
-  })
+	// test('Should show spinner on submit', async () => {
+  //   const { sut } = makeSut()
+  //   await simulateValidSumbit(sut)
+  //   Helper.testElementExists(sut, 'spinner')
+  // })
+
+	// test('Should call AddAccount with correct values', async () => {
+  //   const { addAccountSpy } = makeSut()
+  //   const name = faker.name.findName()
+  //   const email = faker.internet.email()
+  //   const password = faker.internet.password()
+  //   await simulateValidSumbit(name, email, password)
+  //   expect(addAccountSpy.params).toEqual({ 
+	// 		name,
+	// 		email, 
+	// 		password,
+	// 		passwordConfirmation: password
+	// 	})
+  // })
 })
