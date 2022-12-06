@@ -142,11 +142,18 @@ describe('SignUp Component', () => {
   // 	})
   // })
 
-	// test('Should call Authentication only once', async () => {
-    // const {   //   const { addAccountSpy } = makeSut()
-		// } = makeSut()
-    // await simulateValidSumbit()
-    // await simulateValidSumbit()
-    // expect(addAccountSpy.callsCount).toBe(1)
+  // test('Should call AddAccount only once', async () => {
+  // const {   //   const { addAccountSpy } = makeSut()
+  // } = makeSut()
+  // await simulateValidSumbit()
+  // await simulateValidSumbit()
+  // expect(addAccountSpy.callsCount).toBe(1)
+  // })
+
+	// test('Should not call AddAccount if form is invalid', async () => {
+  //   const validationError = faker.random.words()
+  //   const { addAccountSpy } = makeSut({ validationError })
+  //   // await simulateValidSumbit(sut)
+  //   expect(addAccountSpy.callsCount).toBe(0)
   // })
 })
