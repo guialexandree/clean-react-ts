@@ -142,7 +142,7 @@ describe('Login Component', () => {
 
   test('Should go to signup page', async () => {
     makeSut()
-    const register = screen.getByTestId('register')
+    const register = screen.getByTestId('signup-link')
     fireEvent.click(register)
   })
 })
