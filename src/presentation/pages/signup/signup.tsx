@@ -10,24 +10,26 @@ type SignUpProps = {
 }
 
 const SignUp: React.FC<SignUpProps> = ({
-	validation
+  validation
 }: SignUpProps) => {
-	const [state, setState] = useState({
+  const [state, setState] = useState({
     isLoading: false,
-		name: '',
+    name: '',
+		email: '',
     mainError: '',
     nameError: '',
-    emailError: 'Campo Obrigatório',
+    emailError: '',
     passwordError: 'Campo Obrigatório',
     passwordConfirmationError: 'Campo Obrigatório'
   })
 
-	useEffect(() => {
+  useEffect(() => {
     setState({
       ...state,
-      nameError: validation.validate('name', state.name)
+      nameError: validation.validate('name', state.name),
+      emailError: validation.validate('name', state.email)
     })
-  }, [state.name])
+  }, [state.name, state.email])
 
   return (
 		<section className={S.signup}>
