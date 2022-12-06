@@ -45,7 +45,7 @@ const SignUp: React.FC<SignUpProps> = ({
 					<Input type="email" name="email" placeholder="Digite seu e-mail" />
 					<Input type="password" name="password" placeholder="Digite sua senha" />
 					<Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
-					<button className={S.submit} type="submit">Entrar</button>
+					<button disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !! state.passwordConfirmationError} className={S.submit} type="submit">Entrar</button>
 					<span className={S.link}>Voltar para Login</span>
 					<FormStatus />
 				</form>
