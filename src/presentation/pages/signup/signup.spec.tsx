@@ -162,7 +162,7 @@ describe('SignUp Component', () => {
   // 	const error = new EmailInUseError()
   // 	jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error)
   //   await simulateValidSumbit(sut)
-  // 	testElementText('main-error', error.message)
+  // 	Helper.testElementText(sut, 'main-error', error.message)
   //   Helper.testChildCount(sut, 'error-warap', 1)
   // })
 })

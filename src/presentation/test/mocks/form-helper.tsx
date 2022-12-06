@@ -26,3 +26,8 @@ export const testElementExists = (sut: RenderResult, fieldName: string): void =>
   const spinner = sut.getByTestId(fieldName)
   expect(spinner).toBeTruthy()
 }
+
+export const testElementText = (sut: RenderResult, fieldName: string, text: string): void => {
+  const el = sut.getByTestId(fieldName)
+  expect(el.textContent).toBe(text)
+}
