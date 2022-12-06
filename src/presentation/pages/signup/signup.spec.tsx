@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, waitFor } from '@testing-library/react'
-import { AddAccountSpy, Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
+import { AddAccountSpy, Helper, renderWithHistory, SaveAccessTokenMock, ValidationStub } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import SignUp from './signup'
 import faker from 'faker'
@@ -22,6 +22,7 @@ import faker from 'faker'
 type SutTypes = {
   sut: any
   addAccountSpy: AddAccountSpy
+  saveAccessTokenMock: SaveAccessTokenMock
 }
 
 type SutParams = {
@@ -34,14 +35,16 @@ const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   validationStub.errorMessage = params?.validationError
   const addAccountSpy = new AddAccountSpy()
+  const saveAccessTokenMock = new SaveAccessTokenMock()
   const { setCurrentAccountMock } = renderWithHistory({
     history,
-    Page: () => SignUp({ validation: validationStub, addAccount: addAccountSpy })
+    Page: () => SignUp({ validation: validationStub, addAccount: addAccountSpy, saveAccessToken: saveAccessTokenMock })
   })
 
   return {
     sut: setCurrentAccountMock,
-    addAccountSpy
+    addAccountSpy,
+		saveAccessTokenMock
   }
 }
 
@@ -164,5 +167,18 @@ describe('SignUp Component', () => {
   //   await simulateValidSumbit(sut)
   // 	Helper.testElementText(sut, 'main-error', error.message)
   //   Helper.testChildCount(sut, 'error-warap', 1)
+  // })
+
+	// test('Should present error if SaveAccessToken fails',  async () => {
+  //   const { sut, addAccountSpy, saveAccessTokenMock } = makeSut()
+  //   await simulateValidSumbit(sut)
+  // 	expect(history.length).toBe(1)
+  // 	expect(history.location.pathname).toBe('/')
+  // })
+
+	// test('Should call SaveAccessToken on success', async () => {
+  //   const { addAccountSpy, saveAccessTokenMock } = makeSut()
+  //   await simulateValidSumbit(sut)
+  //   expect(saveAccessTokenMock.accessToken).toBe(addAccountSpy.account.accessToken)
   // })
 })
