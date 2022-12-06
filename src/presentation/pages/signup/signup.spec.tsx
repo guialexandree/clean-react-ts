@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, RenderResult, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, waitFor } from '@testing-library/react'
 import { Helper, renderWithHistory, ValidationStub } from '@/presentation/test/mocks'
 import { createMemoryHistory } from 'history'
 import SignUp from './signup'
@@ -17,11 +17,6 @@ const simulateValidSumbit = async (
   const form = sut.getByTestId('form')
   fireEvent.submit(form)
   await waitFor(() => form)
-}
-
-const testElementExists = (sut: RenderResult, fieldName: string): void => {
-  const spinner = screen.getByTestId(fieldName)
-  expect(spinner).toBeTruthy()
 }
 
 type SutTypes = {
@@ -127,6 +122,6 @@ describe('SignUp Component', () => {
 	test('Should show spinner on submit', async () => {
     const { sut } = makeSut()
     await simulateValidSumbit(sut)
-    testElementExists(sut, 'spinner')
+    Helper.testElementExists(sut, 'spinner')
   })
 })
