@@ -4,10 +4,12 @@ import { mockAccountModel } from '@/domain/test/mocks'
 
 export class AddAccountSpy implements AddAccount {
   account = mockAccountModel()
-  params: AddAccountParams
+  params: AuthenticationParams
+  callsCount = 0
 
   async add (params: AddAccountParams): Promise<AccountModel> {
     this.params = params
+    this.callsCount++
     return Promise.resolve(this.account)
   }
 }

@@ -13,7 +13,7 @@ const history = createMemoryHistory({ initialEntries: ['/login'] })
 
 const simulateValidSumbit = async (email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   const sut = {}
-	// Helper.populateField(sut, 'email', email)
+  // Helper.populateField(sut, 'email', email)
   // Helper.populateField(sut, 'password', password)
   const form = screen.getByTestId('form')
   fireEvent.submit(form)
