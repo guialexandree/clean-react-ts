@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
-		isFormInvalid: false,
+    isFormInvalid: false,
     mainError: '',
     emailError: '',
     passwordError: '',
@@ -29,13 +29,13 @@ const Login: React.FC<LoginProps> = ({
   })
 
   useEffect(() => {
-		const emailError = validation.validate('email', state.email)
-		const passwordError = validation.validate('password', state.passwordError)
+    const emailError = validation.validate('email', state.email)
+    const passwordError = validation.validate('password', state.password)
     setState({
       ...state,
       emailError,
       passwordError,
-			isFormInvalid: !!emailError || !!passwordError
+      isFormInvalid: !!emailError || !!passwordError
     })
   }, [state.email, state.password])
 
@@ -68,7 +68,7 @@ const Login: React.FC<LoginProps> = ({
 					<Input type="email" name="email" placeholder="Digite seu e-mail" />
 					<Input type="password" name="password" placeholder="Digite sua senha" />
 					<SubmitButton text="Entrar" />
-					<Link data-testid="signup-link" to="/signup" className={S.link}>Criar conta</Link>
+					<Link data-testid="signup" to="/signup" className={S.link}>Criar conta</Link>
 					<FormStatus />
 				</form>
 			</Context.Provider>

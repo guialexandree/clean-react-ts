@@ -9,18 +9,18 @@ import { Link, useHistory } from 'react-router-dom'
 type SignUpProps = {
   validation: Validation
   addAccount: AddAccount
-	saveAccessToken: SaveAccessToken
+  saveAccessToken: SaveAccessToken
 }
 
 const SignUp: React.FC<SignUpProps> = ({
   validation,
   addAccount,
-	saveAccessToken
+  saveAccessToken
 }: SignUpProps) => {
-	const history = useHistory()
+  const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
-		isFormInvalid: true,
+    isFormInvalid: true,
     name: '',
     email: '',
     password: '',
@@ -33,41 +33,41 @@ const SignUp: React.FC<SignUpProps> = ({
   })
 
   useEffect(() => {
-		const nameError = validation.validate('name', state.name)
-		const emailError = validation.validate('email', state.email)
-		const passwordError = validation.validate('password', state.passwordError)
-		const passwordConfirmationError = validation.validate('passwordConfirmation', state.passwordError)
+    const nameError = validation.validate('name', state.name)
+    const emailError = validation.validate('email', state.email)
+    const passwordError = validation.validate('password', state.passwordError)
+    const passwordConfirmationError = validation.validate('passwordConfirmation', state.passwordError)
 
     setState({
       ...state,
       nameError,
       emailError,
-			passwordError,
-			passwordConfirmationError,
-			isFormInvalid: !!nameError || !!emailError || !!passwordError || !!passwordConfirmationError
+      passwordError,
+      passwordConfirmationError,
+      isFormInvalid: !!nameError || !!emailError || !!passwordError || !!passwordConfirmationError
     })
   }, [state.name, state.email, state.password, state.passwordConfirmation])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-		event.preventDefault()
-		try {
-			if (state.isLoading || state.isFormInvalid) { return }
-			setState({ ...state, isLoading: true })
-			const account = await addAccount.add({
-				name: state.name,
-				email: state.email,
-				password: state.password,
-				passwordConfirmation: state.passwordConfirmation
-			})
-			await saveAccessToken.save(account.accessToken)
+    event.preventDefault()
+    try {
+      if (state.isLoading || state.isFormInvalid) { return }
+      setState({ ...state, isLoading: true })
+      const account = await addAccount.add({
+        name: state.name,
+        email: state.email,
+        password: state.password,
+        passwordConfirmation: state.passwordConfirmation
+      })
+      await saveAccessToken.save(account.accessToken)
       history.replace('/')
-		} catch (error) {
-			setState({
-				...state,
-				isLoading: false,
-				mainError: error.message
-			})
-		}
+    } catch (error) {
+      setState({
+        ...state,
+        isLoading: false,
+        mainError: error.message
+      })
+    }
   }
 
   return (
