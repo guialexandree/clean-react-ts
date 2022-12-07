@@ -34,7 +34,7 @@ const makeSut = (params?: SutParams): SutTypes => {
   validationStub.errorMessage = params?.validationError
   const addAccountSpy = new AddAccountSpy()
   const saveAccessTokenMock = new SaveAccessTokenMock()
-	const sut = render(
+  const sut = render(
     <Router history={history}>
       <SignUp
         validation={validationStub}
