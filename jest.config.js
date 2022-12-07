@@ -10,6 +10,10 @@ module.exports = {
 		'!<rootDir>/src/validation/protocols/index.ts',
 		'!**/*.d.ts'
 	],
+	testPathIgnorePatterns: [
+		'<rootDir>/node_modules/',
+		'<rootDir>/src/main/test/cypress'
+	],
   coverageDirectory: 'coverage',
 	testEnvironment: 'jsdom',
   transform: {
