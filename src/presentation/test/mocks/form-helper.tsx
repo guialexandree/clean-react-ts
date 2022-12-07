@@ -7,7 +7,7 @@ export const testChildCount = (sut: RenderResult, field: string, count: number):
 }
 
 export const testStatusForField = (sut: RenderResult, fieldName: string, validationError: string = ''): void => {
-	const emailStatus = sut.getByTestId(`${fieldName}-status`)
+  const emailStatus = sut.getByTestId(`${fieldName}-status`)
   expect(emailStatus.title).toBe(validationError || 'Tudo certo!')
   expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
