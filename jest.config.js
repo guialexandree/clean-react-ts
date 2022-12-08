@@ -10,11 +10,11 @@ module.exports = {
 		'!<rootDir>/src/validation/protocols/index.ts',
 		'!**/*.d.ts'
 	],
+	coverageDirectory: 'coverage',
 	testPathIgnorePatterns: [
-		'<rootDir>/node_modules/',
-		'<rootDir>/src/main/test/cypress'
-	],
-  coverageDirectory: 'coverage',
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/main/test/cypress'
+  ],
 	testEnvironment: 'jsdom',
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest'
