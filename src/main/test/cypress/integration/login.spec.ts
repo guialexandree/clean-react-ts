@@ -139,10 +139,22 @@ describe('Login', () => {
         accessToken: faker.datatype.uuid()
       }
     }).as('request')
-    cy.clearLocalStorage()
     cy.getByTestId('email').type(faker.internet.email())
     cy.getByTestId('password').type(faker.internet.password())
     cy.getByTestId('submit').dblclick()
     cy.get('@request.all').should('have.length', 1)
+  })
+
+  it('Should not call submit if form is invalid', () => {
+    cy.route({
+      method: 'POST',
+      url: /signin/,
+      status: 200,
+      response: {
+        accessToken: faker.datatype.uuid()
+      }
+    }).as('request')
+    cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
+    cy.get('@request.all').should('have.length', 0)
   })
 })
