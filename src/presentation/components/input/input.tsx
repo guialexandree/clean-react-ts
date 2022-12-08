@@ -4,10 +4,11 @@ import Context from '@/presentation/contexts/form/form-context'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   name: string
+  placeholder: string
 }
 
 const Input: React.FC<Props> = (props: Props) => {
-	const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const { state, setState } = useContext(Context)
   const error = state[`${props.name}Error`]
 
@@ -17,17 +18,17 @@ const Input: React.FC<Props> = (props: Props) => {
 
   return (
     <div className={S.inputWrap}>
-      <input 
-				{...props} 
+      <input
+				{...props}
 				ref={inputRef}
-				data-testid={props.name} 
-				onChange={handleChange} 
+				data-testid={props.name}
+				onChange={handleChange}
 				placeholder=" "
 			/>
-			<label 
+			<label
 				onClick={_ => inputRef.current.focus()}
 			>{props.placeholder}</label>
-      <span 
+      <span
 				data-testid={`${props.name}-status`}
 				title={error || 'Tudo certo!'}
 				className={S.status}
