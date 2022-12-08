@@ -24,11 +24,5 @@
     "skipLibCheck": false                                 /* Skip type checking all .d.ts files. */
   },
 	"include": ["src", "tests"],
-	"exclude": ["tests/e2e/cypress"]
+	"exclude": ["src/main/test/cypress"]
 }
-
-// {
-//   "compilerOptions": {
-//     "target": "es6",
-//   },
-// }
