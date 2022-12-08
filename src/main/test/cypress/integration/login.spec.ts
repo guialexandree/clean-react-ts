@@ -122,12 +122,27 @@ describe('Login', () => {
       }
     })
     cy.clearLocalStorage()
-    cy.getByTestId('email').type('guilherme11@gmail.com')
-    cy.getByTestId('password').type('@12345')
-    cy.getByTestId('submit').click()
+    cy.getByTestId('email').type(faker.internet.email())
+    cy.getByTestId('password').type(faker.internet.password()).type('{enter}')
     cy.getByTestId('spinner').should('not.exist')
     cy.getByTestId('main-error').should('not.exist')
     cy.url().should('eq', `${baseUrl}/`)
     // cy.window().then(window => window.localStorage.getItem('accessToken'))
+  })
+
+  it('Should present multiples submits', () => {
+    cy.route({
+      method: 'POST',
+      url: /signin/,
+      status: 200,
+      response: {
+        accessToken: faker.datatype.uuid()
+      }
+    }).as('request')
+    cy.clearLocalStorage()
+    cy.getByTestId('email').type(faker.internet.email())
+    cy.getByTestId('password').type(faker.internet.password())
+    cy.getByTestId('submit').dblclick()
+    cy.get('@request.all').should('have.length', 1)
   })
 })
