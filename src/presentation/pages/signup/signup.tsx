@@ -73,7 +73,7 @@ const SignUp: React.FC<SignUpProps> = ({
   }
 
   return (
-		<section className={S.signup}>
+		<section className={S.signupWrap}>
 			<Header />
 			<Context.Provider value={{ state, setState }}>
 				<form data-testid="form" className={S.form} onSubmit={handleSubmit} >

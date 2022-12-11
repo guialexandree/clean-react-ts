@@ -62,7 +62,7 @@ const Login: React.FC<LoginProps> = ({
   }
 
   return (
-		<section className={S.login}>
+		<section className={S.loginWrap}>
 			<Header />
 			<Context.Provider value={{ state, setState }}>
 				<form data-testid="form" className={S.form} onSubmit={handleSubmit}>
