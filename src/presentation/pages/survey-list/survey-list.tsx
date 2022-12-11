@@ -1,13 +1,14 @@
-import { Logo, Footer } from '@/presentation/components'
+import { Logo, Footer, Icon } from '@/presentation/components'
+import { IconName } from '@/presentation/components/icon/icon'
 import React from 'react'
 import S from './survey-list-styles.scss'
 
 type SurveyListProps = {
-	
+
 }
- 
+
 const SurveyList: React.FC<SurveyListProps> = () => {
-	return (
+  return (
 		<section className={S.surveyListWrap}>
 			<header className={S.headerWrap}>
 				<section className={S.headerContent}>
@@ -22,65 +23,26 @@ const SurveyList: React.FC<SurveyListProps> = () => {
 				<h2>Enquetes</h2>
 				<ul>
 				<li>
-						<section className={S.surveyContent}>
-							<time>
-								<span className={S.day}>11</span>
-								<span className={S.month}>12</span>
-								<span className={S.year}>2022</span>
-							</time>
-							<p>Qual o seu framework de web favorito?</p>
-						</section>
-						<footer>Ver resultado</footer>
-					</li>
-					<li>
-						<section className={S.surveyContent}>
-							<time>
-								<span className={S.day}>11</span>
-								<span className={S.month}>12</span>
-								<span className={S.year}>2022</span>
-							</time>
-							<p>Qual o seu framework de web favorito?</p>
-						</section>
-						<footer>Ver resultado</footer>
-					</li>
-					<li>
-						<section className={S.surveyContent}>
-							<time>
-								<span className={S.day}>11</span>
-								<span className={S.month}>12</span>
-								<span className={S.year}>2022</span>
-							</time>
-							<p>Qual o seu framework de web favorito?</p>
-						</section>
-						<footer>Ver resultado</footer>
-					</li>
-					<li>
-						<section className={S.surveyContent}>
-							<time>
-								<span className={S.day}>11</span>
-								<span className={S.month}>12</span>
-								<span className={S.year}>2022</span>
-							</time>
-							<p>Qual o seu framework de web favorito?</p>
-						</section>
-						<footer>Ver resultado</footer>
-					</li>
-					<li>
-						<section className={S.surveyContent}>
-							<time>
-								<span className={S.day}>11</span>
-								<span className={S.month}>12</span>
-								<span className={S.year}>2022</span>
-							</time>
-							<p>Qual o seu framework de web favorito?</p>
-						</section>
-						<footer>Ver resultado</footer>
+					<section className={S.surveyContent}>
+						<Icon 
+							iconName={IconName.thumbDown} 
+							className={[ S.iconWrap, S.green ].join(' ')
+							} 
+						/>
+						<time>
+							<span className={S.day}>11</span>
+							<span className={S.month}>12</span>
+							<span className={S.year}>2022</span>
+						</time>
+						<p>Qual o seu framework de web favorito?</p>
+					</section>
+					<footer>Ver resultado</footer>
 					</li>
 				</ul>
 			</section>
 			<Footer />
 		</section>
-	)
+  )
 }
- 
+
 export default SurveyList

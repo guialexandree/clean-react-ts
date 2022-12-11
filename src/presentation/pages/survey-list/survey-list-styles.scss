@@ -93,8 +93,27 @@
 					background-image: 
 						linear-gradient(to right, rgba($primaryLight, 0.1), rgba($primaryLight, 0.1)),
 						linear-gradient(to right, $white, $white);
-				background-position: 0 0, 40px 0;
-				background-size: 54px 100%, 100% 100%;
+					background-position: 0 0, 40px 0;
+					background-size: 54px 100%, 100% 100%;
+					position: relative;
+
+					.iconWrap {
+						position: absolute;
+						top: -10px;
+						right: -10px;
+						padding: 10px;
+						border-radius: 50%;
+						display: flex;
+						box-shadow: 0 1px 3px -1px $black;
+
+						&.green {
+							background-color: $valid;
+						}
+						&.red {
+							background-color: $invalid;
+						}
+					}
+
 					time {
 						display: flex;
 						flex-direction: column;
