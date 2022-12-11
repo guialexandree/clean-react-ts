@@ -64,4 +64,20 @@ describe('SignUp', () => {
     FormHelper.testMainError('Algo de errado aconteceu, Tente novamente em breve.')
     FormHelper.testUrl('/signup')
   })
+
+  it('Should present UnexpectedError invalid data is retuned', () => {
+    Http.mockUnexpectedError()
+    simulateValidSubmit()
+    cy.getByTestId('error-wrap')
+    FormHelper.testUrl('/signup')
+  })
+
+  it('Should present save accessToken is valid credentials are provided', () => {
+    Http.mockOk()
+    cy.clearLocalStorage()
+    simulateValidSubmit()
+    cy.getByTestId('error-wrap').should('not.have.descendants')
+    FormHelper.testUrl('/')
+    FormHelper.testLocalStorageItem('accessToken')
+  })
 })
