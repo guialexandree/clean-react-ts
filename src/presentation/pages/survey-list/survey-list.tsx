@@ -1,33 +1,21 @@
-import { Logo, Footer, Icon } from '@/presentation/components'
+import { Logo, Footer, Icon, Header } from '@/presentation/components'
 import { IconName } from '@/presentation/components/icon/icon'
 import React from 'react'
 import S from './survey-list-styles.scss'
 
-type SurveyListProps = {
-
-}
-
-const SurveyList: React.FC<SurveyListProps> = () => {
+const SurveyList: React.FC = () => {
   return (
 		<section className={S.surveyListWrap}>
-			<header className={S.headerWrap}>
-				<section className={S.headerContent}>
-				<Logo />
-				<section className={S.logoutWrap}>
-					<span>Guilherme</span>
-					<a href="#">Sair</a>
-				</section>
-				</section>
-			</header>
+			<Header />
 			<section className={S.contentWrap}>
 				<h2>Enquetes</h2>
 				<ul>
 				<li>
 					<section className={S.surveyContent}>
-						<Icon 
-							iconName={IconName.thumbDown} 
-							className={[ S.iconWrap, S.green ].join(' ')
-							} 
+						<Icon
+							iconName={IconName.thumbDown}
+							className={[S.iconWrap, S.green].join(' ')
+							}
 						/>
 						<time>
 							<span className={S.day}>11</span>
