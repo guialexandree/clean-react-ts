@@ -17,7 +17,7 @@ const Input: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <div 
+    <div
 			data-testid={`${props.name}-wrap`}
 			className={S.inputWrap}
 			data-status={error ? 'invalid' : 'valid' }
