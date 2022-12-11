@@ -4,7 +4,6 @@ import Context from '@/presentation/contexts/form/form-context'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   name: string
-  placeholder: string
 }
 
 const Input: React.FC<Props> = (props: Props) => {
