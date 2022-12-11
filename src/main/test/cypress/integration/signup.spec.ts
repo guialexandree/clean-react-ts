@@ -61,7 +61,7 @@ describe('SignUp', () => {
     FormHelper.testUrl('/signup')
   })
 
-  it('Should present UnexpectedError on default error cases', () => {
+  it('Should present UnexpectedError on default erro cases', () => {
     Http.mockUnexpectedError()
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
