@@ -6,7 +6,7 @@ type LoginHeaderProps = { }
 
 const LoginHeader: React.FC<LoginHeaderProps> = () => {
   return (
-		<header className={S.header}>
+		<header className={S.headerWrap}>
 			<Logo />
 			<h1>4Dev - Enquete para Programadores</h1>
 		</header>
