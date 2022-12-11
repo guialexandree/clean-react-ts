@@ -70,7 +70,7 @@ describe('Login', () => {
     cy.getByTestId('password').type(faker.internet.password()).type('{enter}')
     cy.getByTestId('error-wrap').should('not.have.descendants')
     FormHelper.testUrl('/')
-    FormHelper.testLocalStorageItem('accessToken')
+    FormHelper.testLocalStorageItem('account')
   })
 
   it('Should present multiples submits', () => {

@@ -3,5 +3,6 @@
 	"fixturesFolder": false,
 	"pluginsFile": "src/main/test/cypress/plugins/index.js",
 	"integrationFolder": "src/main/test/cypress/integration",
-	"supportFile": "src/main/test/cypress/support/index.js"
+	"supportFile": "src/main/test/cypress/support/index.js",
+	"viewportHeight": 860
 }

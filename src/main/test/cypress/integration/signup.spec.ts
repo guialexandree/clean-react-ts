@@ -65,7 +65,6 @@ describe('SignUp', () => {
     Http.mockUnexpectedError()
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
-    FormHelper.testMainError('Algo de errado aconteceu, Tente novamente em breve.')
     FormHelper.testUrl('/signup')
   })
 
@@ -82,7 +81,7 @@ describe('SignUp', () => {
     simulateValidSubmit()
     cy.getByTestId('error-wrap').should('not.have.descendants')
     FormHelper.testUrl('/')
-    FormHelper.testLocalStorageItem('accessToken')
+    FormHelper.testLocalStorageItem('account')
   })
 
   it('Should present multiples submits', () => {
