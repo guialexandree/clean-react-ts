@@ -1,6 +1,6 @@
 import { AxiosAdapter } from '@/infra'
 import { mockAxios, mockHttpResponse } from '@/infra/test'
-import { mockPostRequest } from '@/data/test/mocks'
+import { mockGetRequest, mockPostRequest } from '@/data/test/mocks'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -34,9 +34,13 @@ describe('AxiosHttpClient', () => {
     test('Should return the correct response on axios.post', async () => {
       const { sut, mockedAxios } = makeSut()
 
-      const promise = sut.post(mockPostRequest())
+      const httpResponse = await sut.post(mockPostRequest())
+      const axiosResponse = await mockedAxios.post.mock.results[0].value
 
-      expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
+      expect(httpResponse).toEqual({
+        statusCode: axiosResponse.status,
+        body: axiosResponse.data
+      })
     })
 
     test('Should return the correct error on axios.post', async () => {
@@ -47,6 +51,29 @@ describe('AxiosHttpClient', () => {
       const promise = sut.post(mockPostRequest())
 
       expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
+    })
+  })
+
+  describe('get()', () => {
+    test('Should call axios.get with correct values', async () => {
+      const { sut, mockedAxios } = makeSut()
+      const request = mockGetRequest()
+
+      await sut.get(request)
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(request.url)
+    })
+
+    test('Should return the correct response on axios.post', async () => {
+      const { sut, mockedAxios } = makeSut()
+
+      const httpResponse = await sut.get(mockGetRequest())
+      const axiosResponse = await mockedAxios.get.mock.results[0].value
+
+      expect(httpResponse).toEqual({
+        statusCode: axiosResponse.status,
+        body: axiosResponse.data
+      })
     })
   })
 })
