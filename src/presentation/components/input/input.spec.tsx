@@ -7,7 +7,7 @@ import Context from '@/presentation/contexts/form/form-context'
 const makeSut = (fieldName: string): RenderResult => {
   return render(
     <Context.Provider value={{ state: {} }}>
-      <Input name={fieldName} />
+      <Input placeholder=' ' name={fieldName} />
     </Context.Provider>
   )
 }
