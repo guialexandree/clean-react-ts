@@ -1,4 +1,4 @@
-import { InvalidFieldError, RequiredFieldError } from '@/validation/errors'
+import { InvalidFieldError } from '@/validation/errors'
 import { CompareFieldsValidation } from './compare-fields-validation'
 import faker from 'faker'
 
