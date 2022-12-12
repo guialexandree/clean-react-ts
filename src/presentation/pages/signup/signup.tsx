@@ -15,7 +15,7 @@ const SignUp: React.FC<SignUpProps> = ({
   validation,
   addAccount
 }: SignUpProps) => {
-	const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,

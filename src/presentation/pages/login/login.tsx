@@ -15,7 +15,7 @@ const Login: React.FC<LoginProps> = ({
   validation,
   authentication
 }: LoginProps) => {
-	const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
