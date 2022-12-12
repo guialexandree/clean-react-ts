@@ -52,8 +52,8 @@ describe('Login Component', () => {
   test('Should start with initial state', () => {
     const validationError = faker.random.words()
     makeSut({ validationError })
-		expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
-		expect(screen.getByTestId('submit')).toBeDisabled()
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
+    expect(screen.getByTestId('submit')).toBeDisabled()
     Helper.testStatusForField('email', validationError)
     Helper.testStatusForField('password', validationError)
   })
@@ -88,7 +88,7 @@ describe('Login Component', () => {
     makeSut()
     Helper.populateField('email')
     Helper.populateField('password')
-		expect(screen.getByTestId('submit')).toBeEnabled()
+    expect(screen.getByTestId('submit')).toBeEnabled()
   })
 
   test('Should show spinner on submit', async () => {
@@ -117,8 +117,8 @@ describe('Login Component', () => {
     const error = new InvalidCredentialsError()
     jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(error))
     await simulateValidSubmit()
-		expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
-		expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
+    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
   })
 
   test('Should not call Authentication if form is invalid', async () => {
