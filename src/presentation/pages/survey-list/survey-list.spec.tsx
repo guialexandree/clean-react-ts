@@ -2,9 +2,13 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import SurveyList from './survey-list'
 
+const makeSut = (): void => {
+	render(<SurveyList />)
+}
+
 describe('SurveyList Component', () => {
 	test('Should present 4 empty item on start', () => {
-		render(<SurveyList />)
+		makeSut()
 		const surveyList = screen.getByTestId('survey-list')
 		expect(surveyList.querySelectorAll('li:empty').length).toBe(4)
 	})
