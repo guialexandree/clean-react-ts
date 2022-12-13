@@ -8,7 +8,7 @@ type Props = {
 }
 
 const SurveyItem: React.FC<Props> = ({ survey }: Props) => {
-	const iconName = survey.didAnswer ? IconName.thumbUp : IconName.thumbDown
+  const iconName = survey.didAnswer ? IconName.thumbUp : IconName.thumbDown
   return (
 		<li className={S.surveyItemWrap}>
 			<section className={S.surveyContent}>
