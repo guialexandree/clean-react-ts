@@ -8,10 +8,7 @@ type Props = {
 	loadSurveyList: LoadSurveyList
 }
 
-const SurveyList: React.FC<Props> = ({
-	loadSurveyList
-}: Props) => {
-
+const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
 	useEffect(() => {
 		(async () => {
 			loadSurveyList.loadAll()
