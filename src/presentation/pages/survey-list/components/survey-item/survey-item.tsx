@@ -4,7 +4,7 @@ import S from './survey-item-styles.scss'
 import React from 'react'
 
 type Props = {
-	survey: SurveyModel
+  survey: SurveyModel
 }
 
 const SurveyItem: React.FC<Props> = ({ survey }: Props) => {

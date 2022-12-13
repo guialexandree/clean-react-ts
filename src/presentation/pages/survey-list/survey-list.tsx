@@ -5,15 +5,15 @@ import S from './survey-list-styles.scss'
 import React, { useEffect } from 'react'
 
 type Props = {
-	loadSurveyList: LoadSurveyList
+  loadSurveyList: LoadSurveyList
 }
 
 const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
-	useEffect(() => {
-		(async () => {
-			loadSurveyList.loadAll()
-		})()
-	}, [])
+  useEffect(() => {
+    (async () => {
+      loadSurveyList.loadAll()
+    })()
+  }, [])
   return (
 		<section className={S.surveyListWrap}>
 			<Header />
