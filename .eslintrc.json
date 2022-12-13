@@ -27,8 +27,8 @@
     "react/jsx-uses-react": "error",
 		"no-tabs": "off",
     "react/jsx-uses-vars": "error",
-		"no-useless-escape": "off"
-    // "@typescript-eslint/no-floating-promises": "off",
+		"no-useless-escape": "off",
+    "@typescript-eslint/no-floating-promises": "off"
     // "no-redeclare": "off",
     // "import/export": "off",
   }
