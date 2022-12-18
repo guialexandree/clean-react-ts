@@ -4,7 +4,7 @@
   padding: 10px;
   border-radius: 100%;
   display: flex;
-  box-shadow: 0px 1px 3px -1px $black;
+  box-shadow: $shadow;
 
   &.red {
     background-color: $invalid;

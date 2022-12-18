@@ -30,6 +30,7 @@ button {
 	font-size: 16px;
 	border: none;
 	line-height: 50px;
+	padding: 0 16px;
 
 	&:disabled {
 		background-color: $disabledBackground;
