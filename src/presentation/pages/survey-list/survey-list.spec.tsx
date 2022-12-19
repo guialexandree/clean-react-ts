@@ -2,7 +2,6 @@ import { LoadSurveyList } from '@/domain/usecases'
 import SurveyList from './survey-list'
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { SurveyModel } from '@/domain/models'
 import { mockSurveyListModel } from '@/domain/test/mocks'
 import { UnexpectedError } from '@/domain/errors'
 
@@ -10,7 +9,7 @@ class LoadSurveyListSpy implements LoadSurveyList {
   callsCount: number = 0
   surveys = mockSurveyListModel()
 
-  async loadAll (): Promise<SurveyModel[]> {
+  async loadAll (): Promise<LoadSurveyList.Model[]> {
     this.callsCount++
     return this.surveys
   }

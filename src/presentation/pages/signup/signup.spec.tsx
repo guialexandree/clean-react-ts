@@ -1,12 +1,13 @@
-import { cleanup, fireEvent, render, waitFor, screen } from '@testing-library/react'
+import { AddAccount } from '@/domain/usecases'
 import { EmailInUseError } from '@/domain/errors'
-import { AccountModel } from '@/domain/models'
+import { AddAccountSpy } from '@/domain/test/mocks'
 import { ApiContext } from '@/presentation/contexts'
-import { AddAccountSpy, Helper, ValidationStub } from '@/presentation/test/mocks'
+import { Helper, ValidationStub } from '@/presentation/test/mocks'
 import SignUp from './signup'
 import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
+import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 import faker from 'faker'
 
 const simulateValidSubmit = async (name = faker.name.findName(), email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
@@ -22,7 +23,7 @@ const simulateValidSubmit = async (name = faker.name.findName(), email = faker.i
 type SutTypes = {
   sut: any
   addAccountSpy: AddAccountSpy
-  setCurrentAccountMock: (account: AccountModel) => void
+  setCurrentAccountMock: (account: AddAccount.Model) => void
 }
 
 type SutParams = {
