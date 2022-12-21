@@ -1,5 +1,6 @@
 import faker from 'faker'
-import * as FormHelper from '../support/form-helper'
+import * as FormHelper from '../support/form-helpers'
+import * as Helpers from '../support/helpers'
 import * as Http from '../support/login-mocks'
 
 const populateFields = (): void => {
@@ -45,7 +46,7 @@ describe('Login', () => {
     Http.mockInvalidCredendialsError()
     simulateValidSubmit()
     FormHelper.testMainError('Credenciais inválidas')
-    FormHelper.testUrl('/login')
+    Helpers.testUrl('/login')
   })
 
   it('Should present UnexpectedError on default error cases', () => {
@@ -53,37 +54,29 @@ describe('Login', () => {
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
     FormHelper.testMainError('Algo de errado aconteceu, Tente novamente em breve.')
-    FormHelper.testUrl('/login')
-  })
-
-  it('Should present UnexpectedError invalid data is retuned', () => {
-    Http.mockInvalidData()
-    simulateValidSubmit()
-    cy.getByTestId('error-wrap')
-    FormHelper.testUrl('/login')
+    Helpers.testUrl('/login')
   })
 
   it('Should present save accessToken is valid credentials are provided', () => {
     Http.mockOk()
-    cy.clearLocalStorage()
     cy.getByTestId('email').type(faker.internet.email())
     cy.getByTestId('password').type(faker.internet.password()).type('{enter}')
     cy.getByTestId('error-wrap').should('not.have.descendants')
-    FormHelper.testUrl('/')
-    FormHelper.testLocalStorageItem('account')
+    Helpers.testUrl('/')
+    Helpers.testLocalStorageItem('account')
   })
 
   it('Should present multiples submits', () => {
     Http.mockOk()
     populateFields()
     cy.getByTestId('submit').dblclick()
-    FormHelper.testHttpCallsCount(1)
+    Helpers.testHttpCallsCount(1)
   })
 
   it('Should not call submit if form is invalid', () => {
     Http.mockOk()
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
     cy.get('@request.all').should('have.length', 0)
-    FormHelper.testHttpCallsCount(0)
+    Helpers.testHttpCallsCount(0)
   })
 })

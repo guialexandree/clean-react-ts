@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-export const mockInvalidCredendialsError = (url: string): void => {
+export const mockUnauthorizedError = (url: string): void => {
   cy.server()
   cy.route({
     method: 'POST',
@@ -12,10 +12,10 @@ export const mockInvalidCredendialsError = (url: string): void => {
   }).as('request')
 }
 
-export const mockEmailInUseError = (url: string): void => {
+export const mockForbiddenError = (url: string, method: string): void => {
   cy.server()
   cy.route({
-    method: 'POST',
+    method,
     url,
     status: 403,
     response: {
@@ -24,12 +24,12 @@ export const mockEmailInUseError = (url: string): void => {
   }).as('request')
 }
 
-export const mockUnexpectedError = (url: string, method: string): void => {
+export const mockServerError = (url: string, method: string): void => {
   cy.server()
   cy.route({
     method,
     url,
-    status: faker.random.arrayElement<number>([400, 403, 404]),
+    status: faker.random.arrayElement<number>([400, 404, 500]),
     response: {
       error: faker.random.words()
     }
