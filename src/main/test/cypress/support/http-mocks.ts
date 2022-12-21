@@ -29,7 +29,7 @@ export const mockServerError = (url: string, method: string): void => {
   cy.route({
     method,
     url,
-    status: faker.random.arrayElement<number>([400, 404, 500]),
+    status: faker.helpers.randomize([400, 404, 500]),
     response: {
       error: faker.random.words()
     }
