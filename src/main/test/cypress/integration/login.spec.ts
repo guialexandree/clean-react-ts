@@ -1,7 +1,12 @@
+import * as FormHelper from '../utils/form-helpers'
+import * as Helpers from '../utils/helpers'
+import * as Http from '../utils/http-mocks'
 import faker from 'faker'
-import * as FormHelper from '../support/form-helpers'
-import * as Helpers from '../support/helpers'
-import * as Http from '../support/login-mocks'
+
+const path = 'signin'
+export const mockInvalidCredendialsError = (): void => Http.mockUnauthorizedError(path)
+export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+export const mockSuccess = (): void => Http.mockOk(path, 'POST', 'fx:account')
 
 const populateFields = (): void => {
   cy.getByTestId('email').type(faker.internet.email())
@@ -43,14 +48,14 @@ describe('Login', () => {
   })
 
   it('Should present InvalidCredentialsError on 401', () => {
-    Http.mockInvalidCredendialsError()
+    mockInvalidCredendialsError()
     simulateValidSubmit()
     FormHelper.testMainError('Credenciais inválidas')
     Helpers.testUrl('/login')
   })
 
   it('Should present UnexpectedError on default error cases', () => {
-    Http.mockUnexpectedError()
+    mockUnexpectedError()
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
     FormHelper.testMainError('Algo de errado aconteceu, Tente novamente em breve.')
@@ -58,7 +63,7 @@ describe('Login', () => {
   })
 
   it('Should present save accessToken is valid credentials are provided', () => {
-    Http.mockOk()
+    mockSuccess()
     cy.getByTestId('email').type(faker.internet.email())
     cy.getByTestId('password').type(faker.internet.password()).type('{enter}')
     cy.getByTestId('error-wrap').should('not.have.descendants')
@@ -67,14 +72,14 @@ describe('Login', () => {
   })
 
   it('Should present multiples submits', () => {
-    Http.mockOk()
+    mockSuccess()
     populateFields()
     cy.getByTestId('submit').dblclick()
     Helpers.testHttpCallsCount(1)
   })
 
   it('Should not call submit if form is invalid', () => {
-    Http.mockOk()
+    mockSuccess()
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
     cy.get('@request.all').should('have.length', 0)
     Helpers.testHttpCallsCount(0)

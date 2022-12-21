@@ -1,7 +1,13 @@
 import faker from 'faker'
-import * as FormHelper from '../support/form-helpers'
-import * as Helpers from '../support/helpers'
-import * as Http from '../support/signup-mocks'
+import * as FormHelper from '../utils/form-helpers'
+import * as Helpers from '../utils/helpers'
+import * as Http from '../utils/http-mocks'
+
+const path = 'signup'
+export const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
+export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+export const mockInvalidCredendialsError = (): void => Http.mockUnauthorizedError(path)
+export const mockSuccess = (): void => Http.mockOk(path, 'POST', 'fx:account')
 
 const populateFields = (): void => {
   cy.getByTestId('name').type(faker.name.findName())
@@ -56,21 +62,21 @@ describe('SignUp', () => {
   })
 
   it('Should present EmailInUseError on 403', () => {
-    Http.mockEmailInUseError()
+    mockEmailInUseError()
     simulateValidSubmit()
     FormHelper.testMainError('O e-mail informado já está em uso')
     Helpers.testUrl('/signup')
   })
 
   it('Should present UnexpectedError on default erro cases', () => {
-    Http.mockUnexpectedError()
+    mockUnexpectedError()
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
     Helpers.testUrl('/signup')
   })
 
   it('Should present save accessToken is valid credentials are provided', () => {
-    Http.mockOk()
+    mockSuccess()
     simulateValidSubmit()
     cy.getByTestId('error-wrap').should('not.have.descendants')
     Helpers.testUrl('/')
@@ -78,14 +84,14 @@ describe('SignUp', () => {
   })
 
   it('Should present multiples submits', () => {
-    Http.mockOk()
+    mockSuccess()
     populateFields()
     cy.getByTestId('submit').dblclick()
     Helpers.testHttpCallsCount(1)
   })
 
   it('Should not call submit if form is invalid', () => {
-    Http.mockOk()
+    mockSuccess()
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
     cy.get('@request.all').should('have.length', 0)
     Helpers.testHttpCallsCount(0)
