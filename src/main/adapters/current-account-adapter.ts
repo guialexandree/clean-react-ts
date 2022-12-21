@@ -1,4 +1,3 @@
-import { UnexpectedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 import { makeLocalStorageAdapter } from '@/main/factories/cache'
 
