@@ -5,14 +5,14 @@ import { useHistory } from 'react-router-dom'
 import React, { memo, useContext } from 'react'
 
 const Header: React.FC = () => {
-	const history = useHistory()
-	const { setCurrentAccount } = useContext(ApiContext)
+  const history = useHistory()
+  const { setCurrentAccount } = useContext(ApiContext)
 
-	const logout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
-		event.preventDefault()
-		setCurrentAccount(undefined)
-		history.replace('/login')
-	}
+  const logout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
+    event.preventDefault()
+    setCurrentAccount(undefined)
+    history.replace('/login')
+  }
 
   return (
 		<header className={S.headerWrap}>

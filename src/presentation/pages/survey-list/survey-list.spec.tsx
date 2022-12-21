@@ -8,7 +8,7 @@ import { Router } from 'react-router-dom'
 import React from 'react'
 
 type SutTypes = {
-	loadSurveyListSpy: LoadSurveyListSpy
+  loadSurveyListSpy: LoadSurveyListSpy
 }
 
 const makeSut = (loadSurveyListSpy = new LoadSurveyListSpy()): SutTypes => {
@@ -18,8 +18,8 @@ const makeSut = (loadSurveyListSpy = new LoadSurveyListSpy()): SutTypes => {
 				<SurveyList loadSurveyList={loadSurveyListSpy} />
 			</Router>
 		</ApiContext.Provider>
-	
-	)
+
+  )
 
   return { loadSurveyListSpy }
 }
