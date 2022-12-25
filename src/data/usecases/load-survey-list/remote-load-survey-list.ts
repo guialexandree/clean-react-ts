@@ -10,7 +10,7 @@ export class RemoteLoadSurveyList implements LoadSurveyList {
 
   async loadAll (): Promise<LoadSurveyList.Model[]> {
     const httpReponse = await this.httGetClient.get({ url: this.url })
-    const remoteSurveys = httpReponse.body || []
+    const remoteSurveys = httpReponse.body ?? []
 
     switch (httpReponse.statusCode) {
       case HttpStatusCode.ok:

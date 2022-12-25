@@ -21,8 +21,9 @@
         "@/*": ["*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     "skipDefaultLibCheck": false,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": false                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": false,     
+		"strictNullChecks": false                            /* Skip type checking all .d.ts files. */
   },
 	"include": ["src"],
-	"exclude": ["src/main/test/cypress"]
+	"exclude": ["src/main/test/cypress", "cypress.config.js"]
 }

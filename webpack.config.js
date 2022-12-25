@@ -39,11 +39,13 @@ module.exports = {
 		]
 	},
 	devServer: {
+		devMiddleware: {
+			writeToDisk: true
+		},
+		static: {
+			directory: './public'
+		},
 		historyApiFallback: true,
-    open: true,
-    compress: true,
-		liveReload: false,
-    hot: false,
     port: 8080
 	},
 	externals: {

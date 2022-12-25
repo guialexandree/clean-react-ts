@@ -23,7 +23,3 @@ export class LoadSurveyListSpy implements LoadSurveyList {
     return this.surveys
   }
 }
-
-type SutTypes = {
-  loadSurveyListSpy: LoadSurveyListSpy
-}
