@@ -3,6 +3,7 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   fixturesFolder: 'src/main/test/cypress/fixtures',
   viewportHeight: 860,
+	video: false,
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
