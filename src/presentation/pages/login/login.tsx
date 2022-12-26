@@ -28,15 +28,15 @@ const Login: React.FC<LoginProps> = ({
   })
 
   useEffect(() => validate('email'), [state.email])
-	useEffect(() => validate('password'), [state.password])
+  useEffect(() => validate('password'), [state.password])
 
-	const validate = (fielName: string) => {
-		const { email, password } = state
-		const formData = { email, password }
-		const error = validation.validate(fielName, formData)
-		setState(old => ({ ...old, [`${fielName}Error`]: error }))
-		setState(old => ({ ...old, isFormInvalid: !!old.emailError || !!old.passwordError }))
-	}
+  const validate = (fielName: string): void => {
+    const { email, password } = state
+    const formData = { email, password }
+    const error = validation.validate(fielName, formData)
+    setState(old => ({ ...old, [`${fielName}Error`]: error }))
+    setState(old => ({ ...old, isFormInvalid: !!old.emailError || !!old.passwordError }))
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()

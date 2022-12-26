@@ -36,13 +36,13 @@ const SignUp: React.FC<SignUpProps> = ({
   useEffect(() => { validate('password') }, [state.password])
   useEffect(() => { validate('passwordConfirmation') }, [state.passwordConfirmation])
 
-	const validate = (fielName: string) => {
-		const { name, email, password, passwordConfirmation } = state
-		const formData = { name, email, password, passwordConfirmation }
-		const error = validation.validate(fielName, formData)
-		setState(old => ({ ...old, [`${fielName}Error`]: error }))
-		setState(old => ({ ...old, isFormInvalid: !!old.nameError || !!old.emailError || !!old.passwordError || !!old.passwordConfirmationError }))
-	}
+  const validate = (fielName: string): void => {
+    const { name, email, password, passwordConfirmation } = state
+    const formData = { name, email, password, passwordConfirmation }
+    const error = validation.validate(fielName, formData)
+    setState(old => ({ ...old, [`${fielName}Error`]: error }))
+    setState(old => ({ ...old, isFormInvalid: !!old.nameError || !!old.emailError || !!old.passwordError || !!old.passwordConfirmationError }))
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
