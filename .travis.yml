@@ -5,7 +5,7 @@ script:
   - eslint 'src/**'
   - npm run test:coveralls
 build:
-	provider: heroku
-	api_key: $HEROKU_API
-	app: clean-react-ts
-	skip_cleanup: true
+  provider: heroku
+  api_key: $HEROKU_API
+  app: clean-react-ts
+  skip_cleanup: true
