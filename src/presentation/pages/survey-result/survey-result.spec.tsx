@@ -13,8 +13,8 @@ const makeSut = (): void => {
 } 
 
 describe('SuveyResult Component', () => { 
-	makeSut()
 	test('Should present correct initial state', async () => {
+		makeSut()
     const surveyResult = screen.getByTestId('survey-result')
     expect(surveyResult.childElementCount).toBe(0)
     expect(screen.queryByTestId('error')).not.toBeInTheDocument()
