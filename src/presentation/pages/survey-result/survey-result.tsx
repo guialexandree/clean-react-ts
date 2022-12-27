@@ -5,21 +5,21 @@ import { Header, Footer, Loading, Calendar, Error } from '@/presentation/compone
 import { LoadSurveyResult } from '@/domain/usecases'
 
 type Props = {
-	loadSurveyResult: LoadSurveyResult
+  loadSurveyResult: LoadSurveyResult
 }
 
 const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
-	const [state] = useState({
-		isLoading: false,
-		error: '',
-		surveyResult: null as LoadSurveyResult.Model
-	})
+  const [state, setState] = useState({
+    isLoading: false,
+    error: '',
+    surveyResult: null as LoadSurveyResult.Model
+  })
 
-	useEffect(() => {
-		loadSurveyResult.load()
-			.then()
-			.catch()
-	}, [])
+  useEffect(() => {
+    loadSurveyResult.load()
+      .then(surveyResult => setState(old => ({...old, surveyResult })))
+      .catch()
+  }, [])
 
   return (
 		<section className={S.surveyResultWrap}>
@@ -28,25 +28,21 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
 				{
 					state.surveyResult && <>
 						<hgroup>
-							<Calendar date={ new Date()} className={S.calendarWrap} />
-							<h2>PERGUNTA DA ENQUETE?</h2>
+							<Calendar date={state.surveyResult.date} className={S.calendarWrap} />
+							<h2 data-testid="question">{state.surveyResult.question}</h2>
 						</hgroup>
-						<FlipMove className={S.answersList}>
-							<li>
-								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
-								<span className={S.answer}>ReactJS</span>
-								<span className={S.percent}>50%</span>
-							</li>
-							<li className={S.active}>
-								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
-								<span className={S.answer}>ReactJS</span>
-								<span className={S.percent}>50%</span>
-							</li>
-							<li>
-								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
-								<span className={S.answer}>ReactJS</span>
-								<span className={S.percent}>50%</span>
-							</li>
+						<FlipMove data-testid="answers" className={S.answersList}>
+							{state.surveyResult.answers.map(answer => 
+								<li 
+									key={answer.answer} 
+									className={answer.isCurrentAccountAnswer ? S.active : ''}
+									data-testid="answer-wrap" 
+								>
+									{answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
+									<span data-testid="answer" className={S.answer}>{answer.answer}</span>
+									<span data-testid="percent" className={S.percent}>{answer.percent}%</span>
+								</li>
+								)}
 						</FlipMove>
 						<button>Voltar</button>
 					</>

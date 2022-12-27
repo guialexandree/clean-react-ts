@@ -12,10 +12,10 @@ describe('SurveyItem Component', () => {
   test('Should render with correct values', () => {
     const survey = Object.assign(mockSurveyModel(), {
       didAnswer: true,
-			date: new Date('2022-12-10T00:00:00')
+      date: new Date('2022-12-10T00:00:00')
     })
     makeSut(survey)
-		
+
     expect(screen.getByTestId('day')).toHaveTextContent('10')
     expect(screen.getByTestId('month')).toHaveTextContent('dez')
     expect(screen.getByTestId('year')).toHaveTextContent('2022')
@@ -26,7 +26,7 @@ describe('SurveyItem Component', () => {
   test('Should render with correct values', () => {
     const survey = Object.assign(mockSurveyModel(), {
       didAnswer: false,
-			date: new Date('2020-11-03T00:00:00')
+      date: new Date('2020-11-03T00:00:00')
     })
     makeSut(survey)
 
