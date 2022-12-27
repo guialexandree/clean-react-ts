@@ -2,7 +2,7 @@ import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test/mocks'
-import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
+import { AccessDeniedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 import { SurveyResult } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
@@ -15,7 +15,7 @@ type SutTypes = {
 }
 
 const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
-  const history = createMemoryHistory({ initialEntries: ['/'] })
+  const history = createMemoryHistory({ initialEntries: ['/', '/surveys/any_id'], initialIndex: 1 })
   const setCurrentAccountMock = jest.fn()
   render(
 		<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
@@ -101,4 +101,11 @@ describe('SuveyResult Component', () => {
   //   expect(loadSurveyResultSpy.callsCount).toBe(1)
   //   await waitFor(() => screen.getByTestId('survey-result'))
   // })
+
+	test('Should goto SurveyList on back button click', async () => {
+   	const { history } = makeSut()
+		 await waitFor(() => screen.getByTestId('question'))
+    fireEvent.click(screen.getByTestId('back-button'))
+    expect(history.location.pathname).toBe('/')
+  })
 })
