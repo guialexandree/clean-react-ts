@@ -6,12 +6,11 @@ export namespace LoadSurveyResult {
   export type Model = {
     question: string
     date: Date
-    didAnswer: boolean
-    answers: [{
+    answers: Array<{
       image?: string
       answer: string
       count: number
       percent: number
-    }]
+    }>
   }
 }
