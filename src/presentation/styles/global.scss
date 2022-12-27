@@ -31,7 +31,8 @@ button {
 	border: none;
 	line-height: 50px;
 	padding: 0 16px;
-
+	outline: none;
+	
 	&:disabled {
 		background-color: $disabledBackground;
 		color: $disabledColor;
