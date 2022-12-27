@@ -16,7 +16,17 @@ const SurveyResult: React.FC = () => {
 						</hgroup>
 						<FlipMove className={S.answersList}>
 							<li>
-								<img src="" alt="Imagem do item" />
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
+								<span className={S.answer}>ReactJS</span>
+								<span className={S.percent}>50%</span>
+							</li>
+							<li className={S.active}>
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
+								<span className={S.answer}>ReactJS</span>
+								<span className={S.percent}>50%</span>
+							</li>
+							<li>
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="Imagem do item" />
 								<span className={S.answer}>ReactJS</span>
 								<span className={S.percent}>50%</span>
 							</li>
