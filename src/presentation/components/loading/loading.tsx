@@ -4,7 +4,7 @@ import S from './loading-styles.scss'
 
 const Loading: React.FC = () => {
   return (
-		<section className={S.loadingWrap}>
+		<section data-testid="loading" className={S.loadingWrap}>
 			<section className={S.loading}>
 				<span>Aguarde...</span>
 				<Spinner isNegative />
