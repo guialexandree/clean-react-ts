@@ -20,7 +20,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
     reload: false
   })
 
-  const reload = (): void =>  setState(old => ({ ...old, isLoading: false, error: '', reload: !old.reload }))
+  const reload = (): void => setState(old => ({ ...old, isLoading: false, error: '', reload: !old.reload }))
 
   useEffect(() => {
     loadSurveyResult.load()
