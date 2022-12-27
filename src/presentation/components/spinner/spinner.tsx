@@ -6,8 +6,8 @@ type SpinnerProps = React.HTMLAttributes<HTMLElement> & {
   isNegative?: boolean
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ className, ...props }) => {
-  const negativeClass = props.isNegative ? S.negative : ''
+const Spinner: React.FC<SpinnerProps> = ({ className, isNegative, ...props }) => {
+  const negativeClass = isNegative ? S.negative : ''
   return (
 		<div data-testid='spinner' {...props} className={[S.spinner, negativeClass, className].join(' ')}>
 			<div></div><div></div><div></div><div></div>
