@@ -4,7 +4,10 @@ import * as Http from '../utils/http-mocks'
 const path = 'api/surveys/any_id/results'
 export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
 export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
-export const mockSuccess = (): void => Http.mockOk(path, 'GET', 'survey-result')
+export const mockSuccess = (): void => {
+  Http.mockOk('api/surveys', 'GET', 'survey-list')
+  Http.mockOk(path, 'GET', 'survey-result')
+}
 
 describe('SurveyResult', () => {
   beforeEach(() => {
