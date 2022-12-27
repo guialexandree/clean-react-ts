@@ -103,8 +103,8 @@ describe('SuveyResult Component', () => {
   // })
 
 	test('Should goto SurveyList on back button click', async () => {
-   	const { history } = makeSut()
-		 await waitFor(() => screen.getByTestId('question'))
+		const { history } = makeSut()
+		await waitFor(() => screen.getByTestId('question'))
     fireEvent.click(screen.getByTestId('back-button'))
     expect(history.location.pathname).toBe('/')
   })

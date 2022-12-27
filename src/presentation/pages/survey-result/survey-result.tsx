@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import FlipMove from 'react-flip-move'
 import S from './survey-result-styles.scss'
 import { LoadSurveyResult } from '@/domain/usecases'
-import { Header, Footer, Loading, Calendar, Error } from '@/presentation/components'
+import { Header, Footer, Loading, Error } from '@/presentation/components'
 import { useErrorHandler } from '@/presentation/hooks'
-import { useHistory } from 'react-router-dom'
+import { SurveyResultData } from '@/presentation/pages/survey-result/components'
 
 type Props = {
   loadSurveyResult: LoadSurveyResult
@@ -25,8 +24,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
     setState(old => ({ isLoading: false, surveyResult: null, error: '', reload: !old.reload }))
   }
 
-	const { goBack } = useHistory()
-
   useEffect(() => {
     loadSurveyResult.load()
       .then(surveyResult => setState(old => ({ ...old, surveyResult })))
@@ -37,28 +34,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
 		<section className={S.surveyResultWrap}>
 			<Header />
       <div data-testid="survey-result" className={S.contentWrap}>
-				{
-					state.surveyResult && <>
-						<hgroup>
-							<Calendar date={state.surveyResult.date} className={S.calendarWrap} />
-							<h2 data-testid="question">{state.surveyResult.question}</h2>
-						</hgroup>
-						<FlipMove data-testid="answers" className={S.answersList}>
-							{state.surveyResult.answers.map(answer =>
-								<li
-									key={answer.answer}
-									className={answer.isCurrentAccountAnswer ? S.active : ''}
-									data-testid="answer-wrap"
-								>
-									{answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
-									<span data-testid="answer" className={S.answer}>{answer.answer}</span>
-									<span data-testid="percent" className={S.percent}>{answer.percent}%</span>
-								</li>
-							)}
-						</FlipMove>
-						<button data-testid="back-button" onClick={goBack}>Voltar</button>
-					</>
-				}
+				{ state.surveyResult && <SurveyResultData surveyResult={state.surveyResult} />}
 				{ state.isLoading && <Loading /> }
 				{ state.error && <Error error={state.error} reload={reload} /> }
       </div>
