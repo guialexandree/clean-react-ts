@@ -17,19 +17,18 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
     isLoading: false,
     error: '',
     surveyResult: null as LoadSurveyResult.Model,
-		reload: false
+    reload: false
   })
 
-	const reload = (): void => {
-		setState(old => ({ isLoading: false, surveyResult: null, error: '', reload: !old.reload }))
-	}
+  const reload = (): void => {
+    setState(old => ({ isLoading: false, surveyResult: null, error: '', reload: !old.reload }))
+  }
 
   useEffect(() => {
     loadSurveyResult.load()
       .then(surveyResult => setState(old => ({ ...old, surveyResult })))
       .catch(handleError)
   }, [state.reload])
-
 
   return (
 		<section className={S.surveyResultWrap}>
