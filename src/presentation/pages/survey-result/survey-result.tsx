@@ -10,7 +10,7 @@ const SurveyResult: React.FC = () => {
       <div className={S.contentWrap}>
 				<hgroup>
 					<Calendar date={ new Date()} className={S.calendarWrap} />
-        	<h2>PERGUNTA DA ENQUETE?</h2>
+					<h2>PERGUNTA DA ENQUETE?</h2>
 				</hgroup>
 				<FlipMove className={S.answersList}>
 					<li>
