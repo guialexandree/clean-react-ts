@@ -17,7 +17,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
 
   useEffect(() => {
     loadSurveyResult.load()
-      .then(surveyResult => setState(old => ({...old, surveyResult })))
+      .then(surveyResult => setState(old => ({ ...old, surveyResult })))
       .catch()
   }, [])
 
@@ -32,17 +32,17 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }) => {
 							<h2 data-testid="question">{state.surveyResult.question}</h2>
 						</hgroup>
 						<FlipMove data-testid="answers" className={S.answersList}>
-							{state.surveyResult.answers.map(answer => 
-								<li 
-									key={answer.answer} 
+							{state.surveyResult.answers.map(answer =>
+								<li
+									key={answer.answer}
 									className={answer.isCurrentAccountAnswer ? S.active : ''}
-									data-testid="answer-wrap" 
+									data-testid="answer-wrap"
 								>
 									{answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
 									<span data-testid="answer" className={S.answer}>{answer.answer}</span>
 									<span data-testid="percent" className={S.percent}>{answer.percent}%</span>
 								</li>
-								)}
+							)}
 						</FlipMove>
 						<button>Voltar</button>
 					</>
