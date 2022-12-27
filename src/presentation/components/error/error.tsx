@@ -2,8 +2,8 @@ import React from 'react'
 import S from './error-styles.scss'
 
 type Props = {
-	error: string
-	reload: () => void
+  error: string
+  reload: () => void
 }
 
 const Error: React.FC<Props> = ({ error, reload }) => {

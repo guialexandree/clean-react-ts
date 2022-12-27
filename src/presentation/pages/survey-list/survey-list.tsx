@@ -25,9 +25,9 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
       .catch(handleError)
   }, [state.reload])
 
-	const reload = (): void => {
-		setState(old => ({ surveys: [], error: '', reload: !old.reload }))
-	}
+  const reload = (): void => {
+    setState(old => ({ surveys: [], error: '', reload: !old.reload }))
+  }
 
   return (
     <div className={Styles.surveyListWrap}>
@@ -35,9 +35,9 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
       <div className={Styles.contentWrap}>
         <h2>Enquetes</h2>
         <SurveyContext.Provider value={{ state, setState }}>
-          {state.error 
-						? <Error error={state.error} reload={reload} /> 
-						: <SurveyListItem />}
+          {state.error
+            ? <Error error={state.error} reload={reload} />
+            : <SurveyListItem />}
         </SurveyContext.Provider>
       </div>
       <Footer />

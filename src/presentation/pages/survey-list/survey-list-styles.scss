@@ -7,7 +7,7 @@
 	min-height: 100vh;
 	background-color: $disabledBackground;
 
-	& > .contentWrap {
+	.contentWrap {
 		display: flex;
 		flex-direction: column;
 		align-self: center;
