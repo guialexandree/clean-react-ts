@@ -10,14 +10,14 @@ import { Router } from 'react-router-dom'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
-	history: MemoryHistory
+  history: MemoryHistory
   setCurrentAccountMock: (account: AccountModel) => void
 }
 
 const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
   const setCurrentAccountMock = jest.fn()
-	render(
+  render(
 		<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
 			<Router history={history}>
 				<SurveyResult loadSurveyResult={loadSurveyResultSpy} />
@@ -83,7 +83,7 @@ describe('SuveyResult Component', () => {
   //   expect(screen.getByTestId('error')).toHaveTextContent(error.message)
   // })
 
-	test('Should logout on AccessDeniedError', async () => {
+  test('Should logout on AccessDeniedError', async () => {
     const loadSurveyResultSpy = new LoadSurveyResultSpy()
     jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new AccessDeniedError())
     const { setCurrentAccountMock, history } = makeSut(loadSurveyResultSpy)
@@ -92,7 +92,7 @@ describe('SuveyResult Component', () => {
     expect(history.location.pathname).toBe('/login')
   })
 
-	// test('Should call LoadSurveyResult on reload', async () => {
+  // test('Should call LoadSurveyResult on reload', async () => {
   //   const loadSurveyResultSpy = new LoadSurveyResultSpy()
   //   jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new UnexpectedError())
   //   makeSut(loadSurveyResultSpy)
