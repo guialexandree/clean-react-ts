@@ -9,7 +9,7 @@ const SurveyResult: React.FC = () => {
 			<Header />
       <div className={S.contentWrap}>
 				{
-					false && <>
+					true && <>
 						<hgroup>
 							<Calendar date={ new Date()} className={S.calendarWrap} />
 							<h2>PERGUNTA DA ENQUETE?</h2>
