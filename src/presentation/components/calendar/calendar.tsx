@@ -2,12 +2,12 @@ import React from 'react'
 import S from './calendar-styles.scss'
 
 type Props = {
-	className?: string
-	date: Date
+  className?: string
+  date: Date
 }
 
-const Calendar: React.FC<Props> = ({ date, className}) => {
-	return (
+const Calendar: React.FC<Props> = ({ date, className }) => {
+  return (
 		<time className={[S.calendarWrap, className].join(' ')}>
 			<span data-testid='day' className={S.day}>
 				{date.getDate().toString().padStart(2, '0')}
@@ -19,7 +19,7 @@ const Calendar: React.FC<Props> = ({ date, className}) => {
 				{date.getFullYear()}
 			</span>
 		</time>
-	)
+  )
 }
- 
+
 export default Calendar

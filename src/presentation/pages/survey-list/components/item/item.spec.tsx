@@ -16,7 +16,7 @@ describe('SurveyItem Component', () => {
     makeSut(survey)
     expect(screen.getByTestId('icon')).toHaveProperty('src', IconName.thumbUp)
     expect(screen.getByTestId('question')).toHaveTextContent(survey.question)
-   })
+  })
 
   test('Should render with correct values', () => {
     const survey = Object.assign(mockSurveyModel(), {
@@ -25,5 +25,5 @@ describe('SurveyItem Component', () => {
     makeSut(survey)
     expect(screen.getByTestId('icon')).toHaveProperty('src', IconName.thumbDown)
     expect(screen.getByTestId('question')).toHaveTextContent(survey.question)
-    })
+  })
 })
