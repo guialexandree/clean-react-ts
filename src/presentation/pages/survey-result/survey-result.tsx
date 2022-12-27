@@ -1,10 +1,10 @@
 import React from 'react'
 import FlipMove from 'react-flip-move'
 import S from './survey-result-styles.scss'
-import { Header, Footer, Spinner } from '@/presentation/components'
+import { Header, Footer, Loading } from '@/presentation/components'
 
 const SurveyResult: React.FC = () => {
-	return (
+  return (
 		<section className={S.surveyResultWrap}>
 			<Header />
       <div className={S.contentWrap}>
@@ -27,16 +27,11 @@ const SurveyResult: React.FC = () => {
 					</li>
 				</FlipMove>
 				<button>Voltar</button>
-				<section className={S.loadingWrap}>
-					<section className={S.loading}>
-						<span>Aguarde...</span>
-						<Spinner isNegative />
-					</section>
-				</section>
+				{ false && <Loading /> }
       </div>
       <Footer />
 		</section>
-	)
+  )
 }
- 
-export default SurveyResult;
+
+export default SurveyResult
