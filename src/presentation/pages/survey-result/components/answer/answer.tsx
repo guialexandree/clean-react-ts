@@ -3,16 +3,16 @@ import S from './answer-styles.scss'
 
 type Props = {
   answer: {
-		image?: string
-		answer: string
-		count: number
-		percent: number
-		isCurrentAccountAnswer: boolean
-	}
+    image?: string
+    answer: string
+    count: number
+    percent: number
+    isCurrentAccountAnswer: boolean
+  }
 }
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
-	const activeClassName = answer.isCurrentAccountAnswer ? S.active : ''
+  const activeClassName = answer.isCurrentAccountAnswer ? S.active : ''
   return (
 		<li
 			key={answer.answer}
