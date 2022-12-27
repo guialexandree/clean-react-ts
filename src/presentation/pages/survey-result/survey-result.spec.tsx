@@ -3,14 +3,13 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { SurveyResult } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
 import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test/mocks'
+import { UnexpectedError } from '@/domain/errors'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
 }
 
-const makeSut = (surveyResult = mockSurveyResultModel()): SutTypes => {
-  const loadSurveyResultSpy = new LoadSurveyResultSpy()
-  loadSurveyResultSpy.surveyResult = surveyResult
+const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
   render(
 		<ApiContext.Provider value={{ setCurrentAccount: jest.fn(), getCurrentAccount: () => mockAccountModel() }}>
 			<SurveyResult loadSurveyResult={loadSurveyResultSpy} />
@@ -37,10 +36,12 @@ describe('SuveyResult Component', () => {
   })
 
   test('Should present SurveyResult data on success', async () => {
-    const surveyResult = Object.assign(mockSurveyResultModel(), {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy()
+		const surveyResult = Object.assign(mockSurveyResultModel(), {
       date: new Date('2022-12-10T00:00:00')
     })
-    makeSut(surveyResult)
+		loadSurveyResultSpy.surveyResult = surveyResult
+    makeSut(loadSurveyResultSpy)
 
     expect(await screen.findByTestId('day')).toHaveTextContent('10')
     expect(screen.getByTestId('month')).toHaveTextContent('dez')
@@ -61,4 +62,15 @@ describe('SuveyResult Component', () => {
     expect(percent[0]).toHaveTextContent(`${surveyResult.answers[0].percent}%`)
     expect(percent[1]).toHaveTextContent(`${surveyResult.answers[1].percent}%`)
   })
+
+	// test('Should render error on UnexpectedError', async () => {
+  //   const loadSurveyListSpy = new LoadSurveyResultSpy()
+  //   const error = new UnexpectedError()
+  //   jest.spyOn(loadSurveyListSpy, 'load').mockRejectedValueOnce(error)
+  //   makeSut(loadSurveyListSpy)
+  //   await waitFor(() => screen.getByTestId('survey-result'))
+  //   expect(screen.queryByTestId('question')).not.toBeInTheDocument()
+  //   expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+  //   expect(screen.getByTestId('error')).toHaveTextContent(error.message)
+  // })
 })

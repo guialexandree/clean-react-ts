@@ -60,7 +60,7 @@ describe('SurveyList Component', () => {
   //   const error = new UnexpectedError()
   //   jest.spyOn(loadSurveyListSpy, 'loadAll').mockRejectedValueOnce(error)
   //   makeSut(loadSurveyListSpy)
-  //   await waitFor(() => screen.getByRole('heading'))
+  //   await waitFor(() => screen.findByTestId('surveyItemWrap'))
   //   expect(screen.queryByTestId('survey-list')).not.toBeInTheDocument()
   //   expect(screen.getByTestId('error')).toHaveTextContent(error.message)
   // })
