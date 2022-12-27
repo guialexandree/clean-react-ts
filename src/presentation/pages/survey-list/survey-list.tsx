@@ -29,7 +29,7 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
     setState(old => ({ surveys: [], error: '', reload: !old.reload }))
   }
 
-	return (
+  return (
 		<div className={Styles.surveyListWrap}>
 			<Header />
 			<div className={Styles.contentWrap}>
@@ -38,7 +38,7 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
 			</div>
 			<Footer />
 		</div>
-	)
+  )
 }
 
 export default SurveyList

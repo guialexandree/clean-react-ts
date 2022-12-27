@@ -4,7 +4,7 @@ import { LoadSurveyList } from '@/domain/usecases'
 import { SurveyItemEmpty, SurveyItem } from '@/presentation/pages/survey-list/components'
 
 type Props = {
-	surveys: LoadSurveyList.Model[]
+  surveys: LoadSurveyList.Model[]
 }
 
 const List: React.FC<Props> = ({ surveys }) => {
