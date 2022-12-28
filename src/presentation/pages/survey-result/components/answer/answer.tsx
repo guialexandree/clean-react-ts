@@ -3,7 +3,7 @@ import React from 'react'
 import S from './answer-styles.scss'
 
 type Props = {
-	answer: SurveyResultAnswerModel
+  answer: SurveyResultAnswerModel
 }
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
