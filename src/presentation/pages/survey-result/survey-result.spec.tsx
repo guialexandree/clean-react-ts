@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
-import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test/mocks'
+import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel, SaveSurveyResultSpy } from '@/domain/test/mocks'
 import { AccessDeniedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 import { SurveyResult } from '@/presentation/pages'
@@ -10,22 +10,33 @@ import { Router } from 'react-router-dom'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
+  saveSurveyResultSpy: SaveSurveyResultSpy
   history: MemoryHistory
   setCurrentAccountMock: (account: AccountModel) => void
 }
 
-const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
+type SutParams = {
+  loadSurveyResultSpy?: LoadSurveyResultSpy
+  saveSurveyResultSpy?: SaveSurveyResultSpy
+}
+
+const makeSut = (
+  {
+    loadSurveyResultSpy = new LoadSurveyResultSpy(),
+    saveSurveyResultSpy = new SaveSurveyResultSpy()
+  }: SutParams = {}
+): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/', '/surveys/any_id'], initialIndex: 1 })
   const setCurrentAccountMock = jest.fn()
   render(
 		<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
 			<Router history={history}>
-				<SurveyResult loadSurveyResult={loadSurveyResultSpy} />
+				<SurveyResult loadSurveyResult={loadSurveyResultSpy} saveSurveyResult={saveSurveyResultSpy} />
 			</Router>
 		</ApiContext.Provider>
   )
 
-  return { loadSurveyResultSpy, history, setCurrentAccountMock }
+  return { loadSurveyResultSpy, history, setCurrentAccountMock, saveSurveyResultSpy }
 }
 
 describe('SuveyResult Component', () => {
@@ -50,7 +61,7 @@ describe('SuveyResult Component', () => {
       date: new Date('2022-12-10T00:00:00')
     })
     loadSurveyResultSpy.surveyResult = surveyResult
-    makeSut(loadSurveyResultSpy)
+    makeSut({ loadSurveyResultSpy })
 
     expect(await screen.findByTestId('day')).toHaveTextContent('10')
     expect(screen.getByTestId('month')).toHaveTextContent('dez')
@@ -86,7 +97,7 @@ describe('SuveyResult Component', () => {
   test('Should logout on AccessDeniedError', async () => {
     const loadSurveyResultSpy = new LoadSurveyResultSpy()
     jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new AccessDeniedError())
-    const { setCurrentAccountMock, history } = makeSut(loadSurveyResultSpy)
+    const { setCurrentAccountMock, history } = makeSut({ loadSurveyResultSpy })
     await waitFor(() => screen.getByTestId('survey-result'))
     expect(setCurrentAccountMock).toHaveBeenCalledWith(undefined)
     expect(history.location.pathname).toBe('/login')
@@ -109,11 +120,25 @@ describe('SuveyResult Component', () => {
     expect(history.location.pathname).toBe('/')
   })
 
-	test('Should not present loading on active answer click', async () => {
+  test('Should not present loading on active answer click', async () => {
     makeSut()
     await waitFor(() => screen.getByTestId('question'))
-		const answersWrap = screen.queryAllByTestId('answer-wrap')
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+
     fireEvent.click(answersWrap[0])
-			expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+  })
+
+  test('Should call SaveSurveyResult on non active answer click', async () => {
+    const { saveSurveyResultSpy, loadSurveyResultSpy } = makeSut()
+    await waitFor(() => screen.getByTestId('question'))
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answersWrap[1])
+    expect(screen.queryByTestId('loading')).toBeInTheDocument()
+    expect(saveSurveyResultSpy.params).toEqual({
+      answer: loadSurveyResultSpy.surveyResult.answers[1].answer
+    })
+    await waitFor(() => screen.getByTestId('question'))
   })
 })
