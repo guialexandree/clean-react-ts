@@ -10,13 +10,13 @@ export class RemoteLoadSurveyResult implements LoadSurveyResult {
   ) {}
 
   async load (): Promise<LoadSurveyResult.Model> {
-    const httpReponse = await this.httClient.request({
+    const httpResponse = await this.httClient.request({
       url: this.url,
       method: 'get'
     })
-    const remoteSurveyResult = httpReponse.body
+    const remoteSurveyResult = httpResponse.body
 
-    switch (httpReponse.statusCode) {
+    switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return Object.assign({}, remoteSurveyResult, {
         date: new Date(remoteSurveyResult.date)
       })
