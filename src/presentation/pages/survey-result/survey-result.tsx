@@ -12,7 +12,7 @@ type Props = {
 
 const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }) => {
   const handleError = useErrorHandler((error: Error) => {
-    setState(old => ({ ...old, surveyResult: null, error: error.message }))
+    setState(old => ({ ...old, surveyResult: null, isLoading: false, error: error.message }))
   })
   const [state, setState] = useState({
     isLoading: false,
@@ -21,11 +21,12 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }) =
     reload: false
   })
 
-  const reload = (): void => setState(old => ({ ...old, isLoading: false, error: '', reload: !old.reload }))
-  const onAnswer = (answer: string): void => {
+  const reload = (): void => setState(old => ({ ...old, error: '', reload: !old.reload }))
+
+	const onAnswer = (answer: string): void => {
     setState(old => ({ ...old, isLoading: true }))
     saveSurveyResult.save({ answer })
-      .then(surveyResult => setState(old => ({ ...old, surveyResult })))
+      .then()
       .catch(handleError)
   }
 
