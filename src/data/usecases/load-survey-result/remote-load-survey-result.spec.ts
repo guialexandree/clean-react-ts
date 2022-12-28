@@ -32,7 +32,7 @@ describe('RemoteLoadSurveyResult', () => {
     expect(httpClientSpy.method).toBe('get')
   })
 
-  test('Should throw AccessDeniedError if HttpPostClient returns 403', async () => {
+  test('Should throw AccessDeniedError if HttpClient returns 403', async () => {
     const { sut, httpClientSpy } = makeSut()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.forbidden
@@ -42,7 +42,7 @@ describe('RemoteLoadSurveyResult', () => {
     await expect(promise).rejects.toThrow(new AccessDeniedError())
   })
 
-  test('Should throw UnexpectedError if HttpPostClient returns 404', async () => {
+  test('Should throw UnexpectedError if HttpClient returns 404', async () => {
     const { sut, httpClientSpy } = makeSut()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.notFound
@@ -52,7 +52,7 @@ describe('RemoteLoadSurveyResult', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
-  test('Should throw UnexpectedError if HttpPostClient returns 500', async () => {
+  test('Should throw UnexpectedError if HttpClient returns 500', async () => {
     const { sut, httpClientSpy } = makeSut()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.serverError
