@@ -10,7 +10,7 @@ type Params = {
 export const makeSurveyResult: React.FC = () => {
   const { id } = useParams<Params>()
   return (
-		<SurveyResult 
+		<SurveyResult
 			loadSurveyResult={makeRemoteLoadSurveyResult(id)}
 			saveSurveyResult={makeRemoteSaveSurveyResult(id)}
 		/>
