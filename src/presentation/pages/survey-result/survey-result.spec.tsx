@@ -2,7 +2,7 @@ import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel, SaveSurveyResultSpy } from '@/domain/test/mocks'
-import { AccessDeniedError } from '@/domain/errors'
+import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 import { SurveyResult } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
@@ -83,16 +83,16 @@ describe('SuveyResult Component', () => {
     expect(percent[1]).toHaveTextContent(`${surveyResult.answers[1].percent}%`)
   })
 
-  // test('Should render error on UnexpectedError', async () => {
-  //   const loadSurveyListSpy = new LoadSurveyResultSpy()
-  //   const error = new UnexpectedError()
-  //   jest.spyOn(loadSurveyListSpy, 'load').mockRejectedValueOnce(error)
-  //   makeSut(loadSurveyListSpy)
-  //   await waitFor(() => screen.getByTestId('survey-result'))
-  //   expect(screen.queryByTestId('question')).not.toBeInTheDocument()
-  //   expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
-  //   expect(screen.getByTestId('error')).toHaveTextContent(error.message)
-  // })
+  test('Should render error on UnexpectedError in LoadSurveyResultSpy', async () => {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy()
+    const error = new UnexpectedError()
+    jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(error)
+    makeSut({ loadSurveyResultSpy })
+    await waitFor(() => screen.getByTestId('error'))
+    expect(screen.queryByTestId('question')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+    expect(screen.getByTestId('error')).toHaveTextContent(error.message)
+  })
 
   test('Should logout on AccessDeniedError', async () => {
     const loadSurveyResultSpy = new LoadSurveyResultSpy()
@@ -103,15 +103,16 @@ describe('SuveyResult Component', () => {
     expect(history.location.pathname).toBe('/login')
   })
 
-  // test('Should call LoadSurveyResult on reload', async () => {
-  //   const loadSurveyResultSpy = new LoadSurveyResultSpy()
-  //   jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new UnexpectedError())
-  //   makeSut(loadSurveyResultSpy)
-  //   await waitFor(() => screen.getByTestId('survey-result'))
-  //   fireEvent.click(screen.getByTestId('reload'))
-  //   expect(loadSurveyResultSpy.callsCount).toBe(1)
-  //   await waitFor(() => screen.getByTestId('survey-result'))
-  // })
+  test('Should call LoadSurveyResult on reload', async () => {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy()
+		const error = new UnexpectedError()
+    jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(error)
+    makeSut({ loadSurveyResultSpy })
+    await waitFor(() => screen.getByTestId('error'))
+    fireEvent.click(screen.getByTestId('reload'))
+    expect(loadSurveyResultSpy.callsCount).toBe(1)
+    await waitFor(() => screen.getByTestId('survey-result'))
+  })
 
   test('Should goto SurveyList on back button click', async () => {
     const { history } = makeSut()
@@ -140,5 +141,21 @@ describe('SuveyResult Component', () => {
       answer: loadSurveyResultSpy.surveyResult.answers[1].answer
     })
     await waitFor(() => screen.getByTestId('question'))
+  })
+
+	test('Should render error on UnexpectedError in SaveSurveyResultSpy', async () => {
+    const saveSurveyResultSpy = new SaveSurveyResultSpy()
+    const error = new UnexpectedError()
+    jest.spyOn(saveSurveyResultSpy, 'save').mockRejectedValueOnce(error)
+    makeSut({ saveSurveyResultSpy })
+    await waitFor(() => screen.getByTestId('answers'))
+		
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answersWrap[1])
+    await waitFor(() => screen.getByTestId('error'))
+
+    expect(screen.queryByTestId('question')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+    expect(screen.getByTestId('error')).toHaveTextContent(error.message)
   })
 })
