@@ -4,8 +4,8 @@ import * as Http from '../utils/http-mocks'
 import faker from 'faker'
 
 const path = 'api/signin'
-export const mockInvalidCredendialsError = (): void => Http.mockUnauthorizedError(path)
-export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+export const mockInvalidCredendialsError = (): void => { Http.mockUnauthorizedError(path) }
+export const mockUnexpectedError = (): void => { Http.mockServerError(path, 'POST') }
 export const mockSuccess = (): void => {
   Http.mockOk('api/surveys', 'GET', 'survey-list')
   Http.mockOk(path, 'POST', 'account', 'loginRequest')

@@ -9,8 +9,8 @@ export const mockLoadSuccess = (): void => {
 
 describe('SurveyResult', () => {
   describe('load', () => {
-    const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
-    const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
+    const mockUnexpectedError = (): void => { Http.mockServerError(path, 'GET') }
+    const mockAccessDeniedError = (): void => { Http.mockForbiddenError(path, 'GET') }
 
     beforeEach(() => {
       cy.fixture('account').then(account => {
@@ -69,8 +69,8 @@ describe('SurveyResult', () => {
   })
 
   describe('save', () => {
-    const mockUnexpectedError = (): void => Http.mockServerError(path, 'PUT')
-    const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'PUT')
+    const mockUnexpectedError = (): void => { Http.mockServerError(path, 'PUT') }
+    const mockAccessDeniedError = (): void => { Http.mockForbiddenError(path, 'PUT') }
     const mockSaveSuccess = (): void => {
       Http.mockOk('api/surveys', 'GET', 'survey-list')
       Http.mockOk(path, 'PUT', 'save-survey-result')

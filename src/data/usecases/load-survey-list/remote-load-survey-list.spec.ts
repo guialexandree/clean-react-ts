@@ -67,7 +67,7 @@ describe('RemoteLoadSurveyList ', () => {
     }
     const surveyList = await sut.loadAll()
 
-    await expect(surveyList).toEqual([{
+    expect(surveyList).toEqual([{
       id: httpResult[0].id,
       question: httpResult[0].question,
       didAnswer: httpResult[0].didAnswer,
@@ -92,6 +92,6 @@ describe('RemoteLoadSurveyList ', () => {
     }
     const surveyList = await sut.loadAll()
 
-    await expect(surveyList).toEqual([])
+    expect(surveyList).toEqual([])
   })
 })

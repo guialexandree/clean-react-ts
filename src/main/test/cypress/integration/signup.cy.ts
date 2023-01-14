@@ -4,9 +4,9 @@ import * as Helpers from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 
 const path = 'api/signup'
-export const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
-export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
-export const mockInvalidCredendialsError = (): void => Http.mockUnauthorizedError(path)
+export const mockEmailInUseError = (): void => { Http.mockForbiddenError(path, 'POST') }
+export const mockUnexpectedError = (): void => { Http.mockServerError(path, 'POST') }
+export const mockInvalidCredendialsError = (): void => { Http.mockUnauthorizedError(path) }
 
 export const mockSuccess = (): void => {
   Http.mockOk('api/surveys', 'GET', 'survey-list')

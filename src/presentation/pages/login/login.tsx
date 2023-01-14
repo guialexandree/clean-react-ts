@@ -27,8 +27,8 @@ const Login: React.FC<LoginProps> = ({
     password: ''
   })
 
-  useEffect(() => validate('email'), [state.email])
-  useEffect(() => validate('password'), [state.password])
+  useEffect(() => { validate('email') }, [state.email])
+  useEffect(() => { validate('password') }, [state.password])
 
   const validate = (fielName: string): void => {
     const { email, password } = state

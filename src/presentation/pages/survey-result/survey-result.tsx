@@ -21,7 +21,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }) =
     reload: false
   })
 
-  const reload = (): void => setState(old => ({ ...old, error: '', reload: !old.reload }))
+  const reload = (): void => { setState(old => ({ ...old, error: '', reload: !old.reload })) }
 
   const onAnswer = (answer: string): void => {
     if (state.isLoading) {
@@ -29,13 +29,13 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }) =
     }
     setState(old => ({ ...old, isLoading: true }))
     saveSurveyResult.save({ answer })
-      .then(surveyResult => setState(old => ({ ...old, isLoading: false, surveyResult })))
+      .then(surveyResult => { setState(old => ({ ...old, isLoading: false, surveyResult })) })
       .catch(handleError)
   }
 
   useEffect(() => {
     loadSurveyResult.load()
-      .then(surveyResult => setState(old => ({ ...old, surveyResult })))
+      .then(surveyResult => { setState(old => ({ ...old, surveyResult })) })
       .catch(handleError)
   }, [state.reload])
 
