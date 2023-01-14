@@ -9,7 +9,7 @@ type Props = {
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
   const { onAnswer } = useContext(SurveyResultContext)
-	const activeClassName = answer.isCurrentAccountAnswer ? S.active : ''
+  const activeClassName = answer.isCurrentAccountAnswer ? S.active : ''
   const answerClick = (event: React.MouseEvent<HTMLLIElement>): void => {
     if (event.currentTarget.classList.contains(S.active)) {
       return
