@@ -1,12 +1,13 @@
+import React from 'react'
+import { Router } from 'react-router-dom'
+import { AccountModel } from '@/domain/models'
+import { UnexpectedError, AccessDeniedError } from '@/domain/errors'
+import { LoadSurveyListSpy, mockAccountModel } from '@/domain/test/mocks'
 import { SurveyList } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
-import { AccountModel } from '@/domain/models'
-import { LoadSurveyListSpy, mockAccountModel } from '@/domain/test/mocks'
-import { UnexpectedError, AccessDeniedError } from '@/domain/errors'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
-import React from 'react'
+import { RecoilRoot } from 'recoil'
 
 type SutTypes = {
   loadSurveyListSpy: LoadSurveyListSpy
@@ -18,11 +19,13 @@ const makeSut = (loadSurveyListSpy = new LoadSurveyListSpy()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
   const setCurrentAccountMock = jest.fn()
   render(
-		<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
-			<Router history={history}>
-				<SurveyList loadSurveyList={loadSurveyListSpy} />
-			</Router>
-		</ApiContext.Provider>
+    <RecoilRoot>
+      <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
+        <Router history={history}>
+          <SurveyList loadSurveyList={loadSurveyListSpy} />
+        </Router>
+      </ApiContext.Provider>
+    </RecoilRoot>
   )
   return {
     loadSurveyListSpy,

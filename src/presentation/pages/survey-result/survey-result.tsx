@@ -40,17 +40,17 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }) =
   }, [state.reload])
 
   return (
-		<section className={S.surveyResultWrap}>
-			<Header />
-			<SurveyResultContext.Provider value={{ onAnswer }}>
-				<div data-testid="survey-result" className={S.contentWrap}>
-					{ state.surveyResult && <SurveyResultData surveyResult={state.surveyResult} />}
-					{ state.isLoading && <Loading /> }
-					{ state.error && <Error error={state.error} reload={reload} /> }
-				</div>
-			</SurveyResultContext.Provider>
+    <section className={S.surveyResultWrap}>
+      <Header />
+      <SurveyResultContext.Provider value={{ onAnswer }}>
+        <div data-testid="survey-result" className={S.contentWrap}>
+          { state.surveyResult && <SurveyResultData surveyResult={state.surveyResult} />}
+          { state.isLoading && <Loading /> }
+          { state.error && <Error error={state.error} reload={reload} /> }
+        </div>
+      </SurveyResultContext.Provider>
       <Footer />
-		</section>
+    </section>
   )
 }
 

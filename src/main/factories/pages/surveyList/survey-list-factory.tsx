@@ -4,6 +4,6 @@ import { makeRemoteLoadSurveyList } from '@/main/factories/usecases'
 
 export const makeSurveyList: React.FC = () => {
   return (
-		<SurveyList loadSurveyList={makeRemoteLoadSurveyList()} />
+    <SurveyList loadSurveyList={makeRemoteLoadSurveyList()} />
   )
 }

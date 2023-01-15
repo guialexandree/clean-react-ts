@@ -11,14 +11,14 @@ type Props = {
 const SurveyItem: React.FC<Props> = ({ survey }: Props) => {
   const iconName = survey.didAnswer ? IconName.thumbUp : IconName.thumbDown
   return (
-		<li className={S.surveyItemWrap}>
-			<section className={S.surveyContent}>
-				<Icon iconName={iconName} className={S.iconWrap} />
-				<Calendar date={survey.date} className={S.calendarWrap} />
-				<p data-testid='question'>{survey.question}</p>
-			</section>
-			<footer><Link data-testid="link" to={`/surveys/${survey.id}`}>Ver resultado</Link></footer>
-		</li>
+    <li className={S.surveyItemWrap}>
+      <section className={S.surveyContent}>
+        <Icon iconName={iconName} className={S.iconWrap} />
+        <Calendar date={survey.date} className={S.calendarWrap} />
+        <p data-testid='question'>{survey.question}</p>
+      </section>
+      <footer><Link data-testid="link" to={`/surveys/${survey.id}`}>Ver resultado</Link></footer>
+    </li>
   )
 }
 

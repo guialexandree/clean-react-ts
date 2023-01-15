@@ -5,9 +5,9 @@ import { makeRemoteAuthentication } from '@/main/factories/usecases'
 
 export const makeLogin: React.FC = () => {
   return (
-		<Login
-			authentication={makeRemoteAuthentication()}
-			validation={makeLoginValidation()}
-		/>
+    <Login
+      authentication={makeRemoteAuthentication()}
+      validation={makeLoginValidation()}
+    />
   )
 }

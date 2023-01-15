@@ -14,15 +14,15 @@ const Header: React.FC = () => {
   }
 
   return (
-		<header className={S.headerWrap}>
-			<section className={S.headerContent}>
-				<Logo />
-				<section className={S.logoutWrap}>
-					<span data-testid="username">{getCurrentAccount().name}</span>
-					<a data-testid="logout" href="#" onClick={handleClick}>Sair</a>
-				</section>
-			</section>
-		</header>
+    <header className={S.headerWrap}>
+      <section className={S.headerContent}>
+        <Logo />
+        <section className={S.logoutWrap}>
+          <span data-testid="username">{getCurrentAccount().name}</span>
+          <a data-testid="logout" href="#" onClick={handleClick}>Sair</a>
+        </section>
+      </section>
+    </header>
   )
 }
 

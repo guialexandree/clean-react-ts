@@ -16,11 +16,11 @@ const makeSut = (account = mockAccountModel()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
   const setCurrentAccountMock = jest.fn()
   render(
-		<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }}>
-			<Router history={history}>
-				<Header />
-			</Router>
-		</ApiContext.Provider>
+    <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }}>
+      <Router history={history}>
+        <Header />
+      </Router>
+    </ApiContext.Provider>
   )
 
   return { history, setCurrentAccountMock }

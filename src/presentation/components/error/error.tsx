@@ -8,10 +8,10 @@ type Props = {
 
 const Error: React.FC<Props> = ({ error, reload }) => {
   return (
-		<section className={S.errorWrap}>
-			<span data-testid='error'>{error}</span>
-			<button data-testid='reload' onClick={reload}>Tentar novamente</button>
-		</section>
+    <section className={S.errorWrap}>
+      <span data-testid='error'>{error}</span>
+      <button data-testid='reload' onClick={reload}>Tentar novamente</button>
+    </section>
   )
 }
 

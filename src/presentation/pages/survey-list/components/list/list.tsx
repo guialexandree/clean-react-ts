@@ -9,9 +9,9 @@ type Props = {
 
 const List: React.FC<Props> = ({ surveys }) => {
   return (
-		<ul className={S.listWrap} data-testid='survey-list'>
-			{surveys.length ?	surveys.map((survey: LoadSurveyList.Model) => <SurveyItem key={survey.id} survey={survey} />) :	<SurveyItemEmpty />}
-		</ul>
+    <ul className={S.listWrap} data-testid='survey-list'>
+      {surveys.length ?	surveys.map((survey: LoadSurveyList.Model) => <SurveyItem key={survey.id} survey={survey} />) :	<SurveyItemEmpty />}
+    </ul>
   )
 }
 

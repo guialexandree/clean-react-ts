@@ -5,9 +5,9 @@ import { makeRemoteAddAccount } from '@/main/factories/usecases'
 
 export const makeSignUp: React.FC = () => {
   return (
-		<SignUp
-			addAccount={makeRemoteAddAccount()}
-			validation={makeSignUpValidation()}
-		/>
+    <SignUp
+      addAccount={makeRemoteAddAccount()}
+      validation={makeSignUpValidation()}
+    />
   )
 }

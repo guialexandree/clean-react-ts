@@ -5,7 +5,7 @@ type FooterProps = { }
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-		<footer className={S.footer}></footer>
+    <footer className={S.footer}></footer>
   )
 }
 
