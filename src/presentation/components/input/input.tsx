@@ -1,15 +1,15 @@
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 import S from './input-styles.scss'
-import Context from '@/presentation/contexts/form/form-context'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   name: string
   placeholder: string
+  state: any
+  setState: any
 }
 
-const Input: React.FC<Props> = (props: Props) => {
+const Input: React.FC<Props> = ({ state, setState, ...props }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { state, setState } = useContext(Context)
   const error = state[`${props.name}Error`]
 
   const handleChange = (event: React.FocusEvent<HTMLInputElement>): void => {
@@ -18,25 +18,25 @@ const Input: React.FC<Props> = (props: Props) => {
 
   return (
     <div
-			data-testid={`${props.name}-wrap`}
-			className={S.inputWrap}
-			data-status={error ? 'invalid' : 'valid' }
-			>
+      data-testid={`${props.name}-wrap`}
+      className={S.inputWrap}
+      data-status={error ? 'invalid' : 'valid' }
+    >
       <input
-				{...props}
-				ref={inputRef}
-				title={error}
-				data-testid={props.name}
-				onChange={handleChange}
-				placeholder=" "
-			/>
-			<label
-				data-testid={`${props.name}-label`}
-				title={error}
-				onClick={_ => { inputRef.current.focus() }}
-			>
-				{props.placeholder}
-			</label>
+        {...props}
+        ref={inputRef}
+        title={error}
+        data-testid={props.name}
+        onChange={handleChange}
+        placeholder=" "
+      />
+      <label
+        data-testid={`${props.name}-label`}
+        title={error}
+        onClick={_ => { inputRef.current.focus() }}
+      >
+        {props.placeholder}
+      </label>
     </div>
   )
 }

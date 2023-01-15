@@ -30,7 +30,8 @@
     "react/jsx-uses-vars": "error",
 		"no-useless-escape": "off",
     "@typescript-eslint/no-floating-promises": "off",
-		"@typescript-eslint/prefer-nullish-coalescing": "off"
+		"@typescript-eslint/prefer-nullish-coalescing": "off",
+		"indent": ["error", 2, { "SwitchCase": 1 }]
     // "no-redeclare": "off",
     // "import/export": "off",
   }

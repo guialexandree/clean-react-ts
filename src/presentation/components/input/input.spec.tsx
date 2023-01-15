@@ -1,18 +1,15 @@
 import React from 'react'
 import faker from 'faker'
 import { render, RenderResult, fireEvent } from '@testing-library/react'
-import Input from './input'
-import Context from '@/presentation/contexts/form/form-context'
+import { InputBase } from '@/presentation/components'
 
 const makeSut = (fieldName: string): RenderResult => {
   return render(
-    <Context.Provider value={{ state: {} }}>
-      <Input placeholder=' ' name={fieldName} />
-    </Context.Provider>
+    <InputBase placeholder=' ' name={fieldName} state={{}} setState={null} />
   )
 }
 
-describe('Input Component', () => {
+describe('InputBase Component', () => {
   test('Should begin with readOnly', () => {
     const field = faker.database.column()
     const sut = makeSut(field)
