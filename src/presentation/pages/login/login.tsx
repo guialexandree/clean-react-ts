@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { loginState, Input, SubmitButton, FormStatus } from './components'
 import S from './login-styles.scss'
 import { Authentication } from '@/domain/usecases'
@@ -16,10 +16,12 @@ const Login: React.FC<LoginProps> = ({
   validation,
   authentication
 }: LoginProps) => {
+  const resetLoginState = useResetRecoilState(loginState)
   const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
   const [state, setState] = useRecoilState(loginState)
 
+  useEffect(() => { resetLoginState() }, [])
   useEffect(() => { validate('email') }, [state.email])
   useEffect(() => { validate('password') }, [state.password])
 
@@ -59,7 +61,7 @@ const Login: React.FC<LoginProps> = ({
         <Input type="email" name="email" placeholder="Digite seu e-mail" />
         <Input type="password" name="password" placeholder="Digite sua senha" />
         <SubmitButton text="Entrar" />
-        <Link data-testid="signup" to="/signup" className={S.link}>Criar conta</Link>
+        <Link data-testid="signup-link" to="/signup" className={S.link}>Criar conta</Link>
         <FormStatus />
       </form>
       <Footer />

@@ -25,11 +25,20 @@ describe('Login', () => {
   beforeEach(() => {
     cy.visit('login')
   })
+
   it('Should load with correct initial state', () => {
     FormHelper.testInputStatus('email', 'Campo Obrigatório')
     FormHelper.testInputStatus('password', 'Campo Obrigatório')
     cy.getByTestId('submit').should('have.attr', 'disabled')
     cy.getByTestId('error-wrap').should('not.have.descendants')
+  })
+
+  it('Should reset state on page load', () => {
+    cy.getByTestId('email').type(faker.internet.email())
+    FormHelper.testInputStatus('email')
+    cy.getByTestId('signup-link').click()
+    cy.getByTestId('login-link').click()
+    FormHelper.testInputStatus('email', 'Campo Obrigatório')
   })
 
   it('Should present erro if form is invalid', () => {
