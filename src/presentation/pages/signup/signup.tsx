@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { signUpState, Input, SubmitButton, FormStatus } from './components'
 import S from './signup-styles.scss'
 import { AddAccount } from '@/domain/usecases'
@@ -16,10 +16,12 @@ const SignUp: React.FC<SignUpProps> = ({
   validation,
   addAccount
 }: SignUpProps) => {
+  const resetSignUpState = useResetRecoilState(signUpState)
   const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
   const [state, setState] = useRecoilState(signUpState)
 
+  useEffect(() => { resetSignUpState() }, [])
   useEffect(() => { validate('name') }, [state.name])
   useEffect(() => { validate('email') }, [state.email])
   useEffect(() => { validate('password') }, [state.password])

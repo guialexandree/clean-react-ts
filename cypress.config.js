@@ -10,7 +10,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./src/main/test/cypress/plugins/index.js')(on, config)
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:8080',
     specPattern: 'src/main/test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: 'src/main/test/cypress/support/index.js',
   },
