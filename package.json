@@ -8,8 +8,6 @@
     "dev:base": "webpack-dev-server --config webpack.dev.js",
     "dev": "npm run dev:base -- --open",
     "build": "webpack --config webpack.prod.js",
-    "pretest:coveralls": "npm run test:ci",
-    "test:coveralls": "coveralls < coverage/lcov.info",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --runInBand --noStackTrace --no-cache",
@@ -23,8 +21,8 @@
     "check": "npm-check -s -u"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Guilherme Alexandre Rocha Pereira",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.16.1",
     "@testing-library/jest-dom": "^5.9.5",
