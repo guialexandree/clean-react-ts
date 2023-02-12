@@ -1,2 +1,4 @@
 [![Coverage Status](https://coveralls.io/repos/github/guialexandree/clean-react-ts/badge.svg?branch=master)](https://coveralls.io/github/guialexandree/clean-react-ts?branch=master)
+[![](https://github.com/guialexandree/clean-react-ts/actions/workflows/development-ci.yml/badge.svg)](https://github.com/guialexandree/clean-react-ts/actions/workflows/development-ci.yml/badge.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Known Vulnerabilities](https://snyk.io/test/github/guialexandree/clean-react-ts/badge.svg)](https://snyk.io/test/github/guialexandree/clean-react-ts)
