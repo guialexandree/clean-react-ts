@@ -76,8 +76,8 @@ jobs:
     - name: Units Tests
       run: npm run test:unit
 
-    - name: Integration Tests
-      run: npm run test:integration
+    - name: Cypress Coverage
+      run: npm run test:cypress:ci
 
     - name: Coveralls push
       uses: coverallsapp/github-action@master
